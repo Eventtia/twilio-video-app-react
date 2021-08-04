@@ -6,6 +6,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 // @ts-ignore
 window.TwilioVideo = Video;
 
+const getEndDateFromToken = (token: string) => {
+  const { exp } = JSON.parse(atob(token.split('.')[1]));
+  return new Date(exp * 1000);
+};
+
 export default function useRoom(localTracks: LocalTrack[], onError: Callback, options?: ConnectOptions) {
   const [room, setRoom] = useState<Room | null>(null);
   const [isConnecting, setIsConnecting] = useState(false);
@@ -58,6 +63,16 @@ export default function useRoom(localTracks: LocalTrack[], onError: Callback, op
             // Add a listener to disconnect from the room when a mobile user closes their browser
             window.addEventListener('pagehide', disconnect);
           }
+
+          const endDate = getEndDateFromToken(token);
+          let disconnectOnEnd: ReturnType<typeof setInterval>;
+          disconnectOnEnd = setInterval(() => {
+            const now = new Date();
+            if (now > endDate) {
+              clearInterval(disconnectOnEnd);
+              newRoom.disconnect();
+            }
+          }, 1000);
         },
         error => {
           onError(error);

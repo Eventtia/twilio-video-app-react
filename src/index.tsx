@@ -8,7 +8,7 @@ import App from './App';
 import AppStateProvider, { useAppState } from './state';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import ErrorDialog from './components/ErrorDialog/ErrorDialog';
-import LoginPage from './components/LoginPage/LoginPage';
+// import LoginPage from './components/LoginPage/LoginPage';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import theme from './theme';
 import './types';
@@ -39,14 +39,15 @@ ReactDOM.render(
         <AppStateProvider>
           <Switch>
             <PrivateRoute exact path="/">
+              <h1>Invalid route</h1>
+            </PrivateRoute>
+            {/* <PrivateRoute path="/room/:URLRoomName"> */}
+            <PrivateRoute path="/room/:eventUri/:conference/:meeting">
               <VideoApp />
             </PrivateRoute>
-            <PrivateRoute path="/room/:URLRoomName">
-              <VideoApp />
-            </PrivateRoute>
-            <Route path="/login">
+            {/* <Route path="/login">
               <LoginPage />
-            </Route>
+            </Route> */}
             <Redirect to="/" />
           </Switch>
         </AppStateProvider>

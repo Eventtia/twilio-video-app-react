@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   innerContainer: {
     display: 'flex',
     width: '888px',
-    height: '379px',
+    // height: '379px',
     borderRadius: '8px',
     boxShadow: '0px 2px 4px 0px rgba(40, 42, 43, 0.3)',
     overflow: 'hidden',
@@ -75,6 +75,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     padding: '4em',
     flex: 1,
+    overflow: 'auto',
     [theme.breakpoints.down('sm')]: {
       padding: '2em',
     },
@@ -100,18 +101,18 @@ const IntroContainer = (props: IntroContainerProps) => {
 
   return (
     <div className={classes.background}>
-      <TwilioLogo className={classes.twilioLogo} />
-      {user && location.pathname !== '/login' && <UserMenu />}
+      {/* <TwilioLogo className={classes.twilioLogo} />
+      {user && location.pathname !== '/login' && <UserMenu />} */}
       <div className={classes.container}>
         <div className={classes.innerContainer}>
-          <div className={classes.swooshContainer}>
+          {/* <div className={classes.swooshContainer}>
             <div className={classes.logoContainer}>
               <VideoLogo />
               <Typography variant="h6" className={classes.title}>
                 Twilio Programmable Video
               </Typography>
             </div>
-          </div>
+          </div> */}
           <div className={classes.content}>{props.children}</div>
         </div>
       </div>
