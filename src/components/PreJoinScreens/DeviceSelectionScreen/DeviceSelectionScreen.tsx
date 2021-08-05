@@ -1,9 +1,10 @@
 import React from 'react';
 import { makeStyles, Typography, Grid, Button, Theme, Hidden } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import clsx from 'clsx';
 import LocalVideoPreview from './LocalVideoPreview/LocalVideoPreview';
-import SettingsMenu from './SettingsMenu/SettingsMenu';
-import { Steps } from '../PreJoinScreens';
+import SettingsMenu from './SettingsMenu/EventtiaSettingsMenu';
+// import { Steps } from '../PreJoinScreens';
 import ToggleAudioButton from '../../Buttons/ToggleAudioButton/ToggleAudioButton';
 import ToggleVideoButton from '../../Buttons/ToggleVideoButton/ToggleVideoButton';
 import { useAppState } from '../../../state';
@@ -17,10 +18,25 @@ const useStyles = makeStyles((theme: Theme) => ({
   marginTop: {
     marginTop: '1em',
   },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+  },
   deviceButton: {
     width: '100%',
     border: '2px solid #aaa',
-    margin: '1em 0',
+    marginBottom: '1em',
+    borderRadius: 12,
+    [theme.breakpoints.down('sm')]: {
+      marginTop: '1em',
+      marginBottom: 0,
+    },
+  },
+  halfWidthButton: {
+    [theme.breakpoints.down('sm')]: {
+      width: '45%',
+    },
   },
   localPreviewContainer: {
     paddingRight: '2em',
@@ -50,6 +66,22 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: '0.8em 0',
     margin: 0,
   },
+  eventtiaButton: {
+    backgroundColor: '#631A64',
+    color: '#FFF',
+    width: '100%',
+    borderRadius: 12,
+    border: 'none',
+    '&$disabled': {
+      backgroundColor: '#eee',
+      color: '#ccc',
+    },
+    textTransform: 'none',
+    '&:hover': {
+      backgroundColor: '#761D77',
+    },
+  },
+  disabled: {},
 }));
 
 interface DeviceSelectionScreenProps {
@@ -97,26 +129,46 @@ export default function DeviceSelectionScreen({ token }: DeviceSelectionScreenPr
           <div className={classes.localPreviewContainer}>
             <LocalVideoPreview identity={name} />
           </div>
-          <div className={classes.mobileButtonBar}>
+          {/* <div className={classes.mobileButtonBar}>
             <Hidden mdUp>
               <ToggleAudioButton className={classes.mobileButton} disabled={disableButtons} />
               <ToggleVideoButton className={classes.mobileButton} disabled={disableButtons} />
             </Hidden>
             <SettingsMenu mobileButtonClass={classes.mobileButton} />
-          </div>
+          </div> */}
         </Grid>
         <Grid item md={5} sm={12} xs={12}>
           <Grid container direction="column" justify="space-between" style={{ height: '100%' }}>
-            <div>
-              <Hidden smDown>
-                <ToggleAudioButton className={classes.deviceButton} disabled={disableButtons} />
-                <ToggleVideoButton className={classes.deviceButton} disabled={disableButtons} />
-              </Hidden>
+            <div className={classes.buttonContainer}>
+              {/* <Hidden smDown> */}
+              <ToggleAudioButton
+                className={clsx(classes.deviceButton, classes.halfWidthButton)}
+                disabled={disableButtons}
+              />
+              <ToggleVideoButton
+                className={clsx(classes.deviceButton, classes.halfWidthButton)}
+                disabled={disableButtons}
+              />
+              <SettingsMenu className={classes.deviceButton} />
+              <Button
+                variant="contained"
+                color="primary"
+                data-cy-join-now
+                onClick={handleJoin}
+                disabled={disableButtons}
+                classes={{
+                  root: clsx(classes.deviceButton, classes.eventtiaButton),
+                  disabled: classes.disabled,
+                }}
+              >
+                Click here to join this meeting
+              </Button>
+              {/* </Hidden> */}
             </div>
-            <div className={classes.joinButtons}>
-              {/* <Button variant="outlined" color="primary" onClick={() => setStep(Steps.roomNameStep)}>
+            {/* <div className={classes.joinButtons}>
+              // <Button variant="outlined" color="primary" onClick={() => setStep(Steps.roomNameStep)}>
                 Cancel
-              </Button> */}
+              </Button>
               <Button
                 variant="contained"
                 color="primary"
@@ -126,7 +178,7 @@ export default function DeviceSelectionScreen({ token }: DeviceSelectionScreenPr
               >
                 Click here to join this meeting
               </Button>
-            </div>
+            </div> */}
           </Grid>
         </Grid>
       </Grid>
