@@ -1,10 +1,10 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core';
-import ChatWindow from '../ChatWindow/ChatWindow';
+// import ChatWindow from '../ChatWindow/ChatWindow';
 import ParticipantList from '../ParticipantList/ParticipantList';
 import MainParticipant from '../MainParticipant/MainParticipant';
-import useChatContext from '../../hooks/useChatContext/useChatContext';
+// import useChatContext from '../../hooks/useChatContext/useChatContext';
 
 const useStyles = makeStyles((theme: Theme) => {
   const totalMobileSidebarHeight = `${theme.sidebarMobileHeight +
@@ -28,12 +28,12 @@ const useStyles = makeStyles((theme: Theme) => {
 
 export default function Room() {
   const classes = useStyles();
-  const { isChatWindowOpen } = useChatContext();
+  // const { isChatWindowOpen } = useChatContext();
   return (
-    <div className={clsx(classes.container, { [classes.chatWindowOpen]: isChatWindowOpen })}>
+    <div className={clsx(classes.container /*, { [classes.chatWindowOpen]: isChatWindowOpen } */)}>
       <MainParticipant />
       <ParticipantList />
-      <ChatWindow />
+      {/* <ChatWindow /> */}
     </div>
   );
 }

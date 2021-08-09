@@ -66,7 +66,7 @@ export default function Menu(props: { buttonClassName?: string }) {
           horizontal: 'center',
         }}
       >
-        {roomType !== 'peer-to-peer' && roomType !== 'go' && (
+        {/* {roomType !== 'peer-to-peer' && roomType !== 'go' && (
           <MenuItem
             disabled={isFetching}
             onClick={() => {
@@ -82,7 +82,7 @@ export default function Menu(props: { buttonClassName?: string }) {
             <IconContainer>{isRecording ? <StopRecordingIcon /> : <StartRecordingIcon />}</IconContainer>
             <Typography variant="body1">{isRecording ? 'Stop' : 'Start'} Recording</Typography>
           </MenuItem>
-        )}
+        )} */}
         {flipCameraSupported && (
           <MenuItem disabled={flipCameraDisabled} onClick={toggleFacingMode}>
             <IconContainer>
