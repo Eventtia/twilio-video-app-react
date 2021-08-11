@@ -1,11 +1,11 @@
 import React from 'react';
 import { styled, Theme } from '@material-ui/core/styles';
 
-import MenuBar from './components/MenuBar/MenuBar';
-import MobileTopMenuBar from './components/MobileTopMenuBar/MobileTopMenuBar';
+import MenuBar from './components/MenuBar/EventtiaMenuBar';
+// import MobileTopMenuBar from './components/MobileTopMenuBar/MobileTopMenuBar';
 import PreJoinScreens from './components/PreJoinScreens/PreJoinScreens';
 import ReconnectingNotification from './components/ReconnectingNotification/ReconnectingNotification';
-import RecordingNotifications from './components/RecordingNotifications/RecordingNotifications';
+// import RecordingNotifications from './components/RecordingNotifications/RecordingNotifications';
 import Room from './components/Room/Room';
 
 import useHeight from './hooks/useHeight/useHeight';
@@ -18,11 +18,11 @@ const Container = styled('div')({
 
 const Main = styled('main')(({ theme }: { theme: Theme }) => ({
   overflow: 'hidden',
-  paddingBottom: `${theme.footerHeight}px`, // Leave some space for the footer
+  // paddingBottom: `${theme.footerHeight}px`, // Leave some space for the footer
   background: 'black',
-  [theme.breakpoints.down('sm')]: {
-    paddingBottom: `${theme.mobileFooterHeight + theme.mobileTopBarHeight}px`, // Leave some space for the mobile header and footer
-  },
+  // [theme.breakpoints.down('sm')]: {
+  //   paddingBottom: `${theme.mobileFooterHeight + theme.mobileTopBarHeight}px`, // Leave some space for the mobile header and footer
+  // },
 }));
 
 export default function App() {
@@ -42,8 +42,8 @@ export default function App() {
       ) : (
         <Main>
           <ReconnectingNotification />
-          <RecordingNotifications />
-          <MobileTopMenuBar />
+          {/* <RecordingNotifications /> */}
+          {/* <MobileTopMenuBar /> */}
           <Room />
           <MenuBar />
         </Main>

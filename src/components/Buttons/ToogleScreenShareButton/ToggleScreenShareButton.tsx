@@ -2,6 +2,9 @@ import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
+import ScreenShare from '@material-ui/icons/ScreenShare';
+import StopScreenShare from '@material-ui/icons/StopScreenShare';
 import ScreenShareIcon from '../../../icons/ScreenShareIcon';
 import Tooltip from '@material-ui/core/Tooltip';
 
@@ -26,11 +29,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function ToggleScreenShareButton(props: { disabled?: boolean }) {
+export default function ToggleScreenShareButton(props: { disabled?: boolean; className?: string; fab?: boolean }) {
   const classes = useStyles();
   const screenShareParticipant = useScreenShareParticipant();
-  const { toggleScreenShare } = useVideoContext();
-  const disableScreenShareButton = Boolean(screenShareParticipant);
+  const { toggleScreenShare, isSharingScreen, room } = useVideoContext();
+  const disableScreenShareButton = Boolean(screenShareParticipant) && screenShareParticipant !== room?.localParticipant;
   const isScreenShareSupported = navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia;
   const isDisabled = props.disabled || disableScreenShareButton || !isScreenShareSupported;
 
@@ -44,6 +47,23 @@ export default function ToggleScreenShareButton(props: { disabled?: boolean }) {
     tooltipMessage = SHARE_NOT_SUPPORTED_TEXT;
   }
 
+  if (props.fab)
+    return (
+      <Tooltip
+        title={isSharingScreen ? STOP_SCREEN_SHARE_TEXT : SCREEN_SHARE_TEXT}
+        placement="top"
+        PopperProps={{ disablePortal: true }}
+        style={{ cursor: isDisabled ? 'not-allowed' : 'pointer' }}
+      >
+        <div>
+          {/* The div element is needed because a disabled button will not emit hover events and we want to display
+            a tooltip when screen sharing is disabled */}
+          <Fab className={props.className} onClick={toggleScreenShare} disabled={isDisabled} data-cy-share-screen>
+            {isSharingScreen ? <StopScreenShare /> : <ScreenShare />}
+          </Fab>
+        </div>
+      </Tooltip>
+    );
   return (
     <Tooltip
       title={tooltipMessage}

@@ -121,7 +121,7 @@ export default createMuiTheme({
   sidebarWidth: 300,
   sidebarMobileHeight: 90,
   sidebarMobilePadding: 8,
-  participantBorderWidth: 2,
+  participantBorderWidth: 0,
   mobileTopBarHeight: 52,
   chatWindowWidth: 320,
 });

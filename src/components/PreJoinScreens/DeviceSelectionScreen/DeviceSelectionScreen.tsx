@@ -3,7 +3,7 @@ import { makeStyles, Typography, Grid, Button, Theme, Hidden } from '@material-u
 import CircularProgress from '@material-ui/core/CircularProgress';
 import clsx from 'clsx';
 import LocalVideoPreview from './LocalVideoPreview/LocalVideoPreview';
-import SettingsMenu from './SettingsMenu/EventtiaSettingsMenu';
+import EventtiaDeviceSettingsButton from './SettingsMenu/EventtiaDeviceSettingsButton';
 // import { Steps } from '../PreJoinScreens';
 import ToggleAudioButton from '../../Buttons/ToggleAudioButton/ToggleAudioButton';
 import ToggleVideoButton from '../../Buttons/ToggleVideoButton/ToggleVideoButton';
@@ -25,7 +25,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   deviceButton: {
     width: '100%',
-    border: '2px solid #aaa',
+    border: '2px solid #611d77',
+    color: '#611d77',
     marginBottom: '1em',
     borderRadius: 12,
     [theme.breakpoints.down('sm')]: {
@@ -67,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: 0,
   },
   eventtiaButton: {
-    backgroundColor: '#631A64',
+    backgroundColor: '#22D2B9',
     color: '#FFF',
     width: '100%',
     borderRadius: 12,
@@ -78,7 +79,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     textTransform: 'none',
     '&:hover': {
-      backgroundColor: '#761D77',
+      backgroundColor: '#0D9392',
     },
   },
   disabled: {},
@@ -149,7 +150,7 @@ export default function DeviceSelectionScreen({ token }: DeviceSelectionScreenPr
                 className={clsx(classes.deviceButton, classes.halfWidthButton)}
                 disabled={disableButtons}
               />
-              <SettingsMenu className={classes.deviceButton} />
+              <EventtiaDeviceSettingsButton className={classes.deviceButton} />
               <Button
                 variant="contained"
                 color="primary"

@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
         filter: 'none',
         objectFit: 'contain !important',
       },
-      borderRadius: '4px',
+      borderRadius: '8px',
       border: `${theme.participantBorderWidth}px solid rgb(245, 248, 255)`,
       paddingTop: `calc(${(9 / 16) * 100}% - ${theme.participantBorderWidth}px)`,
       background: 'black',
@@ -98,12 +98,13 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     identity: {
-      background: 'rgba(0, 0, 0, 0.5)',
+      background: 'linear-gradient(to right, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0))',
       color: 'white',
       padding: '0.18em 0.3em',
       margin: 0,
       display: 'flex',
       alignItems: 'center',
+      width: '100%',
     },
     infoRowBottom: {
       display: 'flex',
@@ -111,6 +112,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'absolute',
       bottom: 0,
       left: 0,
+      right: 0,
     },
     typeography: {
       color: 'white',

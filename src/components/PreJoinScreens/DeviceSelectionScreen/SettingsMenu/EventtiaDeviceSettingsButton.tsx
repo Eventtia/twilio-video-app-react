@@ -1,9 +1,10 @@
 import React, { useState, useRef } from 'react';
 import Button from '@material-ui/core/Button';
+import SettingsIcon from '@material-ui/icons/Settings';
 import DeviceSelectionDialog from '../../../DeviceSelectionDialog/DeviceSelectionDialog';
-import SettingsIcon from '../../../../icons/SettingsIcon';
+// import SettingsIcon from '../../../../icons/SettingsIcon';
 
-export default function SettingsMenu({ className }: { className?: string }) {
+export default function EventtiaDeviceSettingsButton({ className }: { className?: string }) {
   const [deviceSettingsOpen, setDeviceSettingsOpen] = useState(false);
 
   return (

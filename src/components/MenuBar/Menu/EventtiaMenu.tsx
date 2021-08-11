@@ -1,12 +1,14 @@
 import React, { useState, useRef } from 'react';
-import AboutDialog from '../../AboutDialog/AboutDialog';
 import DeviceSelectionDialog from '../../DeviceSelectionDialog/DeviceSelectionDialog';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import InfoIconOutlined from '../../../icons/InfoIconOutlined';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import StartRecordingIcon from '../../../icons/StartRecordingIcon';
-import StopRecordingIcon from '../../../icons/StopRecordingIcon';
-import SettingsIcon from '../../../icons/SettingsIcon';
+import FullscreenIcon from '@material-ui/icons/Fullscreen';
+import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
+import SettingsIcon from '@material-ui/icons/Settings';
+import FlipCameraIosIcon from '@material-ui/icons/FlipCameraIos';
+import PersonAdd from '@material-ui/icons/PersonAdd';
+import Fab from '@material-ui/core/Fab';
+import Tooltip from '@material-ui/core/Tooltip';
 import { Button, styled, Theme, useMediaQuery, Menu as MenuContainer, MenuItem, Typography } from '@material-ui/core';
 
 import { useAppState } from '../../../state';
@@ -14,6 +16,8 @@ import useIsRecording from '../../../hooks/useIsRecording/useIsRecording';
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
 import FlipCameraIcon from '../../../icons/FlipCameraIcon';
 import useFlipCameraToggle from '../../../hooks/useFlipCameraToggle/useFlipCameraToggle';
+import useFullScreenToggle from '../../../hooks/useFullScreenToggle/useFullScreenToggle';
+import AddGuestButton from '../../Buttons/AddGuestButton/AddGuestButton';
 
 export const IconContainer = styled('div')({
   display: 'flex',
@@ -22,37 +26,46 @@ export const IconContainer = styled('div')({
   marginRight: '0.3em',
 });
 
-export default function Menu(props: { buttonClassName?: string }) {
+export default function EventtiaMenu(props: { buttonClassName?: string; fab?: boolean }) {
   const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 
-  const [aboutOpen, setAboutOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-
-  const { isFetching, updateRecordingRules, roomType } = useAppState();
-  const { room } = useVideoContext();
-  const isRecording = useIsRecording();
+  const [isFullScreen, toggleFullScreen] = useFullScreenToggle();
 
   const anchorRef = useRef<HTMLButtonElement>(null);
   const { flipCameraDisabled, toggleFacingMode, flipCameraSupported } = useFlipCameraToggle();
 
   return (
     <>
-      <Button
-        onClick={() => setMenuOpen(isOpen => !isOpen)}
-        ref={anchorRef}
-        className={props.buttonClassName}
-        data-cy-more-button
-      >
-        {isMobile ? (
-          <MoreIcon />
-        ) : (
-          <>
-            More
-            <ExpandMoreIcon />
-          </>
-        )}
-      </Button>
+      {props.fab ? (
+        <Tooltip title="More" placement="top">
+          <Fab
+            ref={anchorRef}
+            onClick={() => setMenuOpen(isOpen => !isOpen)}
+            className={props.buttonClassName}
+            data-cy-more-button
+          >
+            <MoreIcon />
+          </Fab>
+        </Tooltip>
+      ) : (
+        <Button
+          onClick={() => setMenuOpen(isOpen => !isOpen)}
+          ref={anchorRef}
+          className={props.buttonClassName}
+          data-cy-more-button
+        >
+          {isMobile ? (
+            <MoreIcon />
+          ) : (
+            <>
+              More
+              <ExpandMoreIcon />
+            </>
+          )}
+        </Button>
+      )}
       <MenuContainer
         open={menuOpen}
         onClose={() => setMenuOpen(isOpen => !isOpen)}
@@ -66,53 +79,35 @@ export default function Menu(props: { buttonClassName?: string }) {
           horizontal: 'center',
         }}
       >
-        {roomType !== 'peer-to-peer' && roomType !== 'go' && (
-          <MenuItem
-            disabled={isFetching}
-            onClick={() => {
-              setMenuOpen(false);
-              if (isRecording) {
-                updateRecordingRules(room!.sid, [{ type: 'exclude', all: true }]);
-              } else {
-                updateRecordingRules(room!.sid, [{ type: 'include', all: true }]);
-              }
-            }}
-            data-cy-recording-button
-          >
-            <IconContainer>{isRecording ? <StopRecordingIcon /> : <StartRecordingIcon />}</IconContainer>
-            <Typography variant="body1">{isRecording ? 'Stop' : 'Start'} Recording</Typography>
-          </MenuItem>
+        {isMobile && (
+          <AddGuestButton
+            menuItem
+            icon={
+              <IconContainer>
+                <PersonAdd />
+              </IconContainer>
+            }
+          />
         )}
         {flipCameraSupported && (
           <MenuItem disabled={flipCameraDisabled} onClick={toggleFacingMode}>
             <IconContainer>
-              <FlipCameraIcon />
+              <FlipCameraIosIcon />
             </IconContainer>
             <Typography variant="body1">Flip Camera</Typography>
           </MenuItem>
         )}
-
+        <MenuItem onClick={toggleFullScreen}>
+          <IconContainer>{isFullScreen ? <FullscreenExitIcon /> : <FullscreenIcon />}</IconContainer>
+          <Typography variant="body1">{isFullScreen ? 'Exit full screen' : 'Full screen'}</Typography>
+        </MenuItem>
         <MenuItem onClick={() => setSettingsOpen(true)}>
           <IconContainer>
             <SettingsIcon />
           </IconContainer>
           <Typography variant="body1">Audio and Video Settings</Typography>
         </MenuItem>
-
-        <MenuItem onClick={() => setAboutOpen(true)}>
-          <IconContainer>
-            <InfoIconOutlined />
-          </IconContainer>
-          <Typography variant="body1">About</Typography>
-        </MenuItem>
       </MenuContainer>
-      <AboutDialog
-        open={aboutOpen}
-        onClose={() => {
-          setAboutOpen(false);
-          setMenuOpen(false);
-        }}
-      />
       <DeviceSelectionDialog
         open={settingsOpen}
         onClose={() => {

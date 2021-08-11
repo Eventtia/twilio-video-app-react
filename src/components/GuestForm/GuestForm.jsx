@@ -31,7 +31,8 @@ const useStyles = makeStyles(theme => ({
     },
   },
   joinButton: {
-    backgroundColor: '#631A64',
+    marginTop: '2em',
+    backgroundColor: '#22D2B9',
     color: '#FFF',
     width: '100%',
     borderRadius: 12,
@@ -41,7 +42,7 @@ const useStyles = makeStyles(theme => ({
     },
     textTransform: 'none',
     '&:hover': {
-      backgroundColor: '#761D77',
+      backgroundColor: '#0D9392',
     },
   },
   disabled: {},

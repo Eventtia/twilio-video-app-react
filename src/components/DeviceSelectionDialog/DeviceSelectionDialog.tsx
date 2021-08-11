@@ -18,7 +18,7 @@ import VideoInputList from './VideoInputList/VideoInputList';
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     width: '600px',
-    minHeight: '400px',
+    // minHeight: '400px',
     [theme.breakpoints.down('xs')]: {
       width: 'calc(100vw - 32px)',
     },
@@ -28,6 +28,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   button: {
     float: 'right',
+    backgroundColor: '#22D2B9',
+    color: '#FFF',
+    borderRadius: 12,
+    textTransform: 'none',
+    '&:hover': {
+      backgroundColor: '#0D9392',
+    },
   },
   paper: {
     [theme.breakpoints.down('xs')]: {

@@ -3,6 +3,9 @@ import clsx from 'clsx';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 import { Button } from '@material-ui/core';
+import Fab from '@material-ui/core/Fab';
+import Tooltip from '@material-ui/core/Tooltip';
+import CallEnd from '@material-ui/icons/CallEnd';
 
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
 
@@ -18,10 +21,18 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function EndCallButton(props: { className?: string }) {
+export default function EndCallButton(props: { className?: string; fab?: boolean }) {
   const classes = useStyles();
   const { room } = useVideoContext();
 
+  if (props.fab)
+    return (
+      <Tooltip title="Disconnect" placement="top">
+        <Fab className={clsx(classes.button, props.className)} onClick={() => room!.disconnect()} data-cy-disconnect>
+          <CallEnd />
+        </Fab>
+      </Tooltip>
+    );
   return (
     <Button onClick={() => room!.disconnect()} className={clsx(classes.button, props.className)} data-cy-disconnect>
       Disconnect
