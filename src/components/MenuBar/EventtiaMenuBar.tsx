@@ -94,9 +94,9 @@ export default function EventtiaMenuBar() {
 
   return (
     <footer className={clsx(classes.container, { showControls })}>
-      <Grid container justify="space-around" alignItems="center">
+      <Grid container justifyContent="space-around" alignItems="center">
         <Grid item>
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <ToggleAudioButton disabled={isReconnecting} fab className={classes.fab} />
             <ToggleVideoButton disabled={isReconnecting} fab className={classes.fab} />
             {/*!isSharingScreen && */ !isMobile && (
@@ -108,7 +108,7 @@ export default function EventtiaMenuBar() {
         </Grid>
         {/* <Hidden smDown> */}
         <Grid style={{ flex: 1 }}>
-          <Grid container justify="flex-end">
+          <Grid container justifyContent="flex-end">
             <Menu fab buttonClassName={classes.fab} />
           </Grid>
         </Grid>

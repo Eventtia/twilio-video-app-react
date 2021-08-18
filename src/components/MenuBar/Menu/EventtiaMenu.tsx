@@ -7,9 +7,11 @@ import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 import SettingsIcon from '@material-ui/icons/Settings';
 import FlipCameraIosIcon from '@material-ui/icons/FlipCameraIos';
 import PersonAdd from '@material-ui/icons/PersonAdd';
+import BackgroundIcon from '@material-ui/icons/Landscape';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
 import { Button, styled, Theme, useMediaQuery, Menu as MenuContainer, MenuItem, Typography } from '@material-ui/core';
+import { isSupported as isBackgroundSelectionSupported } from '@twilio/video-processors';
 
 import { useAppState } from '../../../state';
 import useIsRecording from '../../../hooks/useIsRecording/useIsRecording';
@@ -32,6 +34,8 @@ export default function EventtiaMenu(props: { buttonClassName?: string; fab?: bo
   const [menuOpen, setMenuOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [isFullScreen, toggleFullScreen] = useFullScreenToggle();
+
+  const { setIsBackgroundSelectionOpen } = useVideoContext();
 
   const anchorRef = useRef<HTMLButtonElement>(null);
   const { flipCameraDisabled, toggleFacingMode, flipCameraSupported } = useFlipCameraToggle();
@@ -107,6 +111,19 @@ export default function EventtiaMenu(props: { buttonClassName?: string; fab?: bo
           </IconContainer>
           <Typography variant="body1">Audio and Video Settings</Typography>
         </MenuItem>
+        {isBackgroundSelectionSupported && (
+          <MenuItem
+            onClick={() => {
+              setIsBackgroundSelectionOpen(true);
+              setMenuOpen(false);
+            }}
+          >
+            <IconContainer>
+              <BackgroundIcon />
+            </IconContainer>
+            <Typography variant="body1">Backgrounds</Typography>
+          </MenuItem>
+        )}
       </MenuContainer>
       <DeviceSelectionDialog
         open={settingsOpen}

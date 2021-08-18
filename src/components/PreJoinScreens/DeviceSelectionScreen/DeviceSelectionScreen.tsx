@@ -110,7 +110,7 @@ export default function DeviceSelectionScreen({ token }: DeviceSelectionScreenPr
 
   if (isFetching || isConnecting) {
     return (
-      <Grid container justify="center" alignItems="center" direction="column" style={{ height: '100%' }}>
+      <Grid container justifyContent="center" alignItems="center" direction="column" style={{ height: '100%' }}>
         <div>
           <CircularProgress variant="indeterminate" />
         </div>
@@ -125,7 +125,7 @@ export default function DeviceSelectionScreen({ token }: DeviceSelectionScreenPr
 
   return (
     <>
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <Grid item md={7} sm={12} xs={12}>
           <div className={classes.localPreviewContainer}>
             <LocalVideoPreview identity={name} />
@@ -139,7 +139,7 @@ export default function DeviceSelectionScreen({ token }: DeviceSelectionScreenPr
           </div> */}
         </Grid>
         <Grid item md={5} sm={12} xs={12}>
-          <Grid container direction="column" justify="space-between" style={{ height: '100%' }}>
+          <Grid container direction="column" justifyContent="space-between" style={{ height: '100%' }}>
             <div className={classes.buttonContainer}>
               {/* <Hidden smDown> */}
               <ToggleAudioButton
