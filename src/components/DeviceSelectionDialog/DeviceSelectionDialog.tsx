@@ -14,6 +14,8 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import VideoInputList from './VideoInputList/VideoInputList';
+import TestAudioButton from '../TestAudioButton/TestAudioButton';
+import clsx from 'clsx';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -26,8 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: 'calc(100% - 35px)',
     },
   },
-  button: {
-    float: 'right',
+  primaryButton: {
     backgroundColor: '#22D2B9',
     color: '#FFF',
     borderRadius: 12,
@@ -35,6 +36,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     '&:hover': {
       backgroundColor: '#0D9392',
     },
+  },
+  doneButton: {
+    float: 'right',
   },
   paper: {
     [theme.breakpoints.down('xs')]: {
@@ -77,10 +81,18 @@ export default function DeviceSelectionDialog({ open, onClose }: { open: boolean
         <div className={classes.listSection}>
           <AudioOutputList />
         </div>
+        <div className={classes.listSection}>
+          <TestAudioButton className={classes.primaryButton} />
+        </div>
       </DialogContent>
       <Divider />
       <DialogActions>
-        <Button color="primary" variant="contained" className={classes.button} onClick={onClose}>
+        <Button
+          color="primary"
+          variant="contained"
+          className={clsx(classes.primaryButton, classes.doneButton)}
+          onClick={onClose}
+        >
           Done
         </Button>
       </DialogActions>
