@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,10 +34,14 @@ const useStyles = makeStyles(theme => ({
     },
   },
   buttonCopy: {
-    backgroundColor: '#e0e0e0',
+    backgroundColor: '#22D2B9',
+    color: '#FFF',
     width: '100%',
     borderRadius: 12,
-    textTransform: 'capitalize',
+    textTransform: 'none',
+    '&:hover': {
+      backgroundColor: '#0D9392',
+    },
   },
 }));
 
@@ -44,6 +49,7 @@ const INPUT_ID = 'guest-link';
 
 const AddGuestDialog = ({ onClose }) => {
   const classes = useStyles();
+  const { t } = useTranslation();
   const location = window.location;
   const guestLink = `${location.protocol}//${location.host}${location.pathname}`;
   const copyLink = () => {
@@ -65,9 +71,9 @@ const AddGuestDialog = ({ onClose }) => {
       <Fade in>
         <Paper className={classes.root}>
           <Typography variant="subtitle2" className={classes.titleDialog}>
-            Add guest
+            {t('addGuest')}
           </Typography>
-          <Typography variant="body2">To invite someone to this meeting, share this link with them.</Typography>
+          <Typography variant="body2">{t('inviteGuestInfo')}</Typography>
           <TextField
             disabled
             fullWidth
@@ -78,7 +84,7 @@ const AddGuestDialog = ({ onClose }) => {
             size="small"
           />
           <Button onClick={copyLink} className={classes.buttonCopy} size="small" variant="contained">
-            Copy invitation
+            {t('copyInvitation')}
           </Button>
         </Paper>
       </Fade>

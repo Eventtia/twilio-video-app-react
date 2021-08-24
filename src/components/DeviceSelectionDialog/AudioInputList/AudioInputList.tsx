@@ -6,10 +6,12 @@ import { SELECTED_AUDIO_INPUT_KEY } from '../../../constants';
 import useDevices from '../../../hooks/useDevices/useDevices';
 import useMediaStreamTrack from '../../../hooks/useMediaStreamTrack/useMediaStreamTrack';
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
+import { useTranslation } from 'react-i18next';
 
 export default function AudioInputList() {
   const { audioInputDevices } = useDevices();
   const { localTracks } = useVideoContext();
+  const { t } = useTranslation();
 
   const localAudioTrack = localTracks.find(track => track.kind === 'audio') as LocalAudioTrack;
   const mediaStreamTrack = useMediaStreamTrack(localAudioTrack);
@@ -23,7 +25,7 @@ export default function AudioInputList() {
   return (
     <div>
       <Typography variant="subtitle2" gutterBottom>
-        Audio Input
+        {t('audioInput')}
       </Typography>
       <Grid container alignItems="center" justifyContent="space-between">
         <div className="inputSelect">
@@ -42,7 +44,7 @@ export default function AudioInputList() {
               </Select>
             </FormControl>
           ) : (
-            <Typography>{localAudioTrack?.mediaStreamTrack.label || 'No Local Audio'}</Typography>
+            <Typography>{localAudioTrack?.mediaStreamTrack.label || t('noLocalAudio')}</Typography>
           )}
         </div>
         <AudioLevelIndicator audioTrack={localAudioTrack} color="black" />

@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { useAppState } from '../../state';
 import useQuery from '../../hooks/useQuery/useQuery';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -61,6 +62,7 @@ const GuestForm = ({ setToken }) => {
   const [company, setCompany] = useState('');
   const { setError } = useAppState();
   const { forceMeeting } = useQuery();
+  const { t } = useTranslation();
 
   const classes = useStyles();
 
@@ -107,12 +109,10 @@ const GuestForm = ({ setToken }) => {
   return (
     <form onSubmit={requestToken} className={classes.root}>
       <Typography variant="subtitle2" className={classes.titleDialog}>
-        Join Meeting
+        {t('joinMeeting')}
       </Typography>
-      <Typography variant="body2">
-        To join the meeting you need to enter your name and the company you belong to.
-      </Typography>
-      <Typography variant="caption">Full name</Typography>
+      <Typography variant="body2">{t('guestFieldsInfo')}</Typography>
+      <Typography variant="caption">{t('fullName')}</Typography>
       <TextField
         id="full_name"
         variant="outlined"
@@ -123,7 +123,7 @@ const GuestForm = ({ setToken }) => {
         margin="dense"
         fullWidth
       />
-      <Typography variant="caption">Company</Typography>
+      <Typography variant="caption">{t('company')}</Typography>
       <TextField
         id="company"
         variant="outlined"
@@ -145,7 +145,7 @@ const GuestForm = ({ setToken }) => {
         }}
         fullWidth
       >
-        Click here to join this meeting
+        {t('clickToJoin')}
       </Button>
     </form>
   );

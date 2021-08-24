@@ -16,6 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import VideoInputList from './VideoInputList/VideoInputList';
 import TestAudioButton from '../TestAudioButton/TestAudioButton';
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -59,22 +60,23 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function DeviceSelectionDialog({ open, onClose }: { open: boolean; onClose: () => void }) {
   const classes = useStyles();
+  const { t } = useTranslation();
 
   return (
     <Dialog open={open} onClose={onClose} classes={{ paper: classes.paper }}>
-      <DialogTitle>Audio and Video Settings</DialogTitle>
+      <DialogTitle>{t('audioVideoSettings')}</DialogTitle>
       <Divider />
       <DialogContent className={classes.container}>
         <div className={classes.listSection}>
           <Typography variant="h6" className={classes.headline}>
-            Video
+            {t('video')}
           </Typography>
           <VideoInputList />
         </div>
         <Divider />
         <div className={classes.listSection}>
           <Typography variant="h6" className={classes.headline}>
-            Audio
+            {t('audio')}
           </Typography>
           <AudioInputList />
         </div>
@@ -93,7 +95,7 @@ export default function DeviceSelectionDialog({ open, onClose }: { open: boolean
           className={clsx(classes.primaryButton, classes.doneButton)}
           onClick={onClose}
         >
-          Done
+          {t('done')}
         </Button>
       </DialogActions>
     </Dialog>

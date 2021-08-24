@@ -8,6 +8,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import CallEnd from '@material-ui/icons/CallEnd';
 
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,10 +25,11 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function EndCallButton(props: { className?: string; fab?: boolean }) {
   const classes = useStyles();
   const { room } = useVideoContext();
+  const { t } = useTranslation();
 
   if (props.fab)
     return (
-      <Tooltip title="Disconnect" placement="top">
+      <Tooltip title={t('disconnect') as string} placement="top">
         <Fab className={clsx(classes.button, props.className)} onClick={() => room!.disconnect()} data-cy-disconnect>
           <CallEnd />
         </Fab>
@@ -35,7 +37,7 @@ export default function EndCallButton(props: { className?: string; fab?: boolean
     );
   return (
     <Button onClick={() => room!.disconnect()} className={clsx(classes.button, props.className)} data-cy-disconnect>
-      Disconnect
+      {t('disconnect')}
     </Button>
   );
 }

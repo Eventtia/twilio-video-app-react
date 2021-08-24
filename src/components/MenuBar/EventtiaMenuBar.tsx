@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme: Theme) =>
       transition: 'opacity 1.2s, transform 1.2s, visibility 0s 1.2s',
       opacity: 0,
       visibility: 'hidden',
-      background: 'rgba(0, 0, 0, 0.5)',
       '&.showControls, &:hover': {
         transition: 'opacity 0.6s, transform 0.6s, visibility 0s',
         opacity: 1,
@@ -90,7 +89,7 @@ export default function EventtiaMenuBar() {
   const { room } = useVideoContext();
   const isUserActive = useIsUserActive();
   const smallScreen = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
-  const showControls = isUserActive || smallScreen;
+  const showControls = true || isUserActive || smallScreen;
 
   return (
     <footer className={clsx(classes.container, { showControls })}>

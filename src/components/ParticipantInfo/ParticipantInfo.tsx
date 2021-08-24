@@ -5,7 +5,7 @@ import { LocalAudioTrack, LocalVideoTrack, Participant, RemoteAudioTrack, Remote
 
 import AudioLevelIndicator from '../AudioLevelIndicator/AudioLevelIndicator';
 import AvatarIcon from '../../icons/AvatarIcon';
-import NetworkQualityLevel from '../NetworkQualityLevel/NetworkQualityLevel';
+// import NetworkQualityLevel from '../NetworkQualityLevel/NetworkQualityLevel';
 import PinIcon from './PinIcon/PinIcon';
 import ScreenShareIcon from '../../icons/ScreenShareIcon';
 import Typography from '@material-ui/core/Typography';
@@ -14,6 +14,7 @@ import useIsTrackSwitchedOff from '../../hooks/useIsTrackSwitchedOff/useIsTrackS
 import usePublications from '../../hooks/usePublications/usePublications';
 import useTrack from '../../hooks/useTrack/useTrack';
 import useParticipantIsReconnecting from '../../hooks/useParticipantIsReconnecting/useParticipantIsReconnecting';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -162,6 +163,8 @@ export default function ParticipantInfo({
 
   const classes = useStyles();
 
+  const { t } = useTranslation();
+
   return (
     <div
       className={clsx(classes.container, {
@@ -172,7 +175,7 @@ export default function ParticipantInfo({
       data-cy-participant={participant.identity}
     >
       <div className={classes.infoContainer}>
-        <NetworkQualityLevel participant={participant} />
+        {/* <NetworkQualityLevel participant={participant} /> */}
         <div className={classes.infoRowBottom}>
           {isScreenShareEnabled && (
             <span className={classes.screenShareIconContainer}>
@@ -183,7 +186,7 @@ export default function ParticipantInfo({
             <AudioLevelIndicator audioTrack={audioTrack} />
             <Typography variant="body1" className={classes.typeography} component="span">
               {participant.identity}
-              {isLocalParticipant && ' (You)'}
+              {isLocalParticipant && t('you')}
             </Typography>
           </span>
         </div>
@@ -198,7 +201,7 @@ export default function ParticipantInfo({
         {isParticipantReconnecting && (
           <div className={classes.reconnectingContainer}>
             <Typography variant="body1" className={classes.typeography}>
-              Reconnecting...
+              {t('reconnecting')}
             </Typography>
           </div>
         )}

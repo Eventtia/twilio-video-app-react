@@ -10,6 +10,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import useScreenShareParticipant from '../../../hooks/useScreenShareParticipant/useScreenShareParticipant';
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
+import { useTranslation } from 'react-i18next';
 
 export const SCREEN_SHARE_TEXT = 'Share Screen';
 export const STOP_SCREEN_SHARE_TEXT = 'Stop Sharing Screen';
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function ToggleScreenShareButton(props: { disabled?: boolean; className?: string; fab?: boolean }) {
   const classes = useStyles();
+  const { t } = useTranslation();
   const screenShareParticipant = useScreenShareParticipant();
   const { toggleScreenShare, isSharingScreen, room } = useVideoContext();
   const disableScreenShareButton = Boolean(screenShareParticipant) && screenShareParticipant !== room?.localParticipant;
@@ -40,17 +42,17 @@ export default function ToggleScreenShareButton(props: { disabled?: boolean; cla
   let tooltipMessage = '';
 
   if (disableScreenShareButton) {
-    tooltipMessage = SHARE_IN_PROGRESS_TEXT;
+    tooltipMessage = t('anotherSharingScreen');
   }
 
   if (!isScreenShareSupported) {
-    tooltipMessage = SHARE_NOT_SUPPORTED_TEXT;
+    tooltipMessage = t('screenShareNotSupported');
   }
 
   if (props.fab)
     return (
       <Tooltip
-        title={isSharingScreen ? STOP_SCREEN_SHARE_TEXT : SCREEN_SHARE_TEXT}
+        title={(tooltipMessage || (isSharingScreen ? t('stopSharingScreen') : t('shareScreen'))) as string}
         placement="top"
         PopperProps={{ disablePortal: true }}
         style={{ cursor: isDisabled ? 'not-allowed' : 'pointer' }}
@@ -81,7 +83,7 @@ export default function ToggleScreenShareButton(props: { disabled?: boolean; cla
           startIcon={<ScreenShareIcon />}
           data-cy-share-screen
         >
-          {SCREEN_SHARE_TEXT}
+          {t('shareScreen')}
         </Button>
       </span>
     </Tooltip>

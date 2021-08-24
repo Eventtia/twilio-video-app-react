@@ -7,6 +7,7 @@ import VideoTrack from '../../VideoTrack/VideoTrack';
 import useDevices from '../../../hooks/useDevices/useDevices';
 import useMediaStreamTrack from '../../../hooks/useMediaStreamTrack/useMediaStreamTrack';
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles({
   preview: {
@@ -23,6 +24,7 @@ export default function VideoInputList() {
   const classes = useStyles();
   const { videoInputDevices } = useDevices();
   const { localTracks } = useVideoContext();
+  const { t } = useTranslation();
 
   const localVideoTrack = localTracks.find(track => track.kind === 'video') as LocalVideoTrack | undefined;
   const mediaStreamTrack = useMediaStreamTrack(localVideoTrack);
@@ -52,7 +54,7 @@ export default function VideoInputList() {
       {videoInputDevices.length > 1 ? (
         <FormControl fullWidth>
           <Typography variant="subtitle2" gutterBottom>
-            Video Input
+            {t('videoInput')}
           </Typography>
           <Select
             onChange={e => replaceTrack(e.target.value as string)}
@@ -69,9 +71,9 @@ export default function VideoInputList() {
       ) : (
         <>
           <Typography variant="subtitle2" gutterBottom>
-            Video Input
+            {t('videoInput')}
           </Typography>
-          <Typography>{localVideoTrack?.mediaStreamTrack.label || 'No Local Video'}</Typography>
+          <Typography>{localVideoTrack?.mediaStreamTrack.label || t('noLocalVideo')}</Typography>
         </>
       )}
     </div>

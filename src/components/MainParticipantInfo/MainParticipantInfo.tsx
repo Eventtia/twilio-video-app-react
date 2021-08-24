@@ -5,7 +5,7 @@ import { LocalAudioTrack, LocalVideoTrack, Participant, RemoteAudioTrack, Remote
 
 import AudioLevelIndicator from '../AudioLevelIndicator/AudioLevelIndicator';
 import AvatarIcon from '../../icons/AvatarIcon';
-import NetworkQualityLevel from '../NetworkQualityLevel/NetworkQualityLevel';
+// import NetworkQualityLevel from '../NetworkQualityLevel/NetworkQualityLevel';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
@@ -16,6 +16,7 @@ import usePublications from '../../hooks/usePublications/usePublications';
 import useScreenShareParticipant from '../../hooks/useScreenShareParticipant/useScreenShareParticipant';
 import useTrack from '../../hooks/useTrack/useTrack';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -24,9 +25,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
   },
   identity: {
-    background: 'rgba(0, 0, 0, 0.5)',
+    background: 'linear-gradient(to right, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0))',
     color: 'white',
-    padding: '0.1em 0.3em 0.1em 0',
+    padding: '0.1em 1em 0.1em 0',
     display: 'inline-flex',
     '& svg': {
       marginLeft: '0.3em',
@@ -139,6 +140,8 @@ export default function MainParticipantInfo({ participant, children }: MainParti
 
   const isRecording = useIsRecording();
 
+  const { t } = useTranslation();
+
   return (
     <div
       data-cy-main-participant
@@ -153,11 +156,11 @@ export default function MainParticipantInfo({ participant, children }: MainParti
             <AudioLevelIndicator audioTrack={audioTrack} />
             <Typography variant="body1" color="inherit">
               {participant.identity}
-              {isLocal && ' (You)'}
-              {screenSharePublication && ' - Screen'}
+              {isLocal && t('you')}
+              {screenSharePublication && t('screen')}
             </Typography>
           </div>
-          <NetworkQualityLevel participant={localParticipant} />
+          {/* <NetworkQualityLevel participant={localParticipant} /> */}
         </div>
         {isRecording && (
           <Tooltip
@@ -181,7 +184,7 @@ export default function MainParticipantInfo({ participant, children }: MainParti
       {isParticipantReconnecting && (
         <div className={classes.reconnectingContainer}>
           <Typography variant="body1" style={{ color: 'white' }}>
-            Reconnecting...
+            {t('reconnecting')}
           </Typography>
         </div>
       )}

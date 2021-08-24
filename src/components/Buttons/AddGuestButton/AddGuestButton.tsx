@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import PersonAdd from '@material-ui/icons/PersonAdd';
 
 import AddGuestDialog from './AddGuestDialog';
+import { useTranslation } from 'react-i18next';
 
 export default function AddGuestButton(props: {
   className?: string;
@@ -15,11 +16,12 @@ export default function AddGuestButton(props: {
   icon?: React.ReactNode;
 }) {
   const [dialogOpen, setDialogOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <>
       {props.fab ? (
-        <Tooltip title="Add guest" placement="top">
+        <Tooltip title={t('addGuest') as string} placement="top">
           <div>
             <Fab className={props.className} onClick={() => setDialogOpen(true)}>
               <PersonAdd />
@@ -29,7 +31,7 @@ export default function AddGuestButton(props: {
       ) : (
         <MenuItem onClick={() => setDialogOpen(true)}>
           {props.icon}
-          <Typography variant="body1">Add guest</Typography>
+          <Typography variant="body1">{t('addGuest')}</Typography>
         </MenuItem>
       )}
       {dialogOpen && <AddGuestDialog onClose={() => setDialogOpen(false)} />}

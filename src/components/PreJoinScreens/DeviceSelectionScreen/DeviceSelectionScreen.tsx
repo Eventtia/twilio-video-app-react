@@ -10,6 +10,7 @@ import ToggleVideoButton from '../../Buttons/ToggleVideoButton/ToggleVideoButton
 import { useAppState } from '../../../state';
 import useChatContext from '../../../hooks/useChatContext/useChatContext';
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   gutterBottom: {
@@ -97,6 +98,7 @@ export default function DeviceSelectionScreen({ token }: DeviceSelectionScreenPr
   const { connect: chatConnect } = useChatContext();
   const { connect: videoConnect, isAcquiringLocalTracks, isConnecting } = useVideoContext();
   const disableButtons = isFetching || isAcquiringLocalTracks || isConnecting;
+  const { t } = useTranslation();
 
   const { name } = parseToken(token);
 
@@ -116,7 +118,7 @@ export default function DeviceSelectionScreen({ token }: DeviceSelectionScreenPr
         </div>
         <div>
           <Typography variant="body2" style={{ fontWeight: 'bold', fontSize: '16px' }}>
-            Joining Meeting
+            {t('joiningMeeting')}
           </Typography>
         </div>
       </Grid>
@@ -162,7 +164,7 @@ export default function DeviceSelectionScreen({ token }: DeviceSelectionScreenPr
                   disabled: classes.disabled,
                 }}
               >
-                Click here to join this meeting
+                {t('clickToJoin')}
               </Button>
               {/* </Hidden> */}
             </div>

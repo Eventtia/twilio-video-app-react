@@ -20,6 +20,7 @@ import FlipCameraIcon from '../../../icons/FlipCameraIcon';
 import useFlipCameraToggle from '../../../hooks/useFlipCameraToggle/useFlipCameraToggle';
 import useFullScreenToggle from '../../../hooks/useFullScreenToggle/useFullScreenToggle';
 import AddGuestButton from '../../Buttons/AddGuestButton/AddGuestButton';
+import { useTranslation } from 'react-i18next';
 
 export const IconContainer = styled('div')({
   display: 'flex',
@@ -30,6 +31,7 @@ export const IconContainer = styled('div')({
 
 export default function EventtiaMenu(props: { buttonClassName?: string; fab?: boolean }) {
   const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
+  const { t } = useTranslation();
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -43,7 +45,7 @@ export default function EventtiaMenu(props: { buttonClassName?: string; fab?: bo
   return (
     <>
       {props.fab ? (
-        <Tooltip title="More" placement="top">
+        <Tooltip title={t('more') as string} placement="top">
           <Fab
             ref={anchorRef}
             onClick={() => setMenuOpen(isOpen => !isOpen)}
@@ -64,7 +66,7 @@ export default function EventtiaMenu(props: { buttonClassName?: string; fab?: bo
             <MoreIcon />
           ) : (
             <>
-              More
+              {t('more')}
               <ExpandMoreIcon />
             </>
           )}
@@ -98,18 +100,18 @@ export default function EventtiaMenu(props: { buttonClassName?: string; fab?: bo
             <IconContainer>
               <FlipCameraIosIcon />
             </IconContainer>
-            <Typography variant="body1">Flip Camera</Typography>
+            <Typography variant="body1">{t('flipCamera')}</Typography>
           </MenuItem>
         )}
         <MenuItem onClick={toggleFullScreen}>
           <IconContainer>{isFullScreen ? <FullscreenExitIcon /> : <FullscreenIcon />}</IconContainer>
-          <Typography variant="body1">{isFullScreen ? 'Exit full screen' : 'Full screen'}</Typography>
+          <Typography variant="body1">{isFullScreen ? t('exitFullScreen') : t('fullScreen')}</Typography>
         </MenuItem>
         <MenuItem onClick={() => setSettingsOpen(true)}>
           <IconContainer>
             <SettingsIcon />
           </IconContainer>
-          <Typography variant="body1">Audio and Video Settings</Typography>
+          <Typography variant="body1">{t('audioVideoSettings')}</Typography>
         </MenuItem>
         {isBackgroundSelectionSupported && (
           <MenuItem
@@ -121,7 +123,7 @@ export default function EventtiaMenu(props: { buttonClassName?: string; fab?: bo
             <IconContainer>
               <BackgroundIcon />
             </IconContainer>
-            <Typography variant="body1">Backgrounds</Typography>
+            <Typography variant="body1">{t('backgrounds')}</Typography>
           </MenuItem>
         )}
       </MenuContainer>

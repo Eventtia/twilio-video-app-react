@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import PlayCircleFilled from '@material-ui/icons/PlayCircleFilled';
 import Stop from '@material-ui/icons/Stop';
+import { useTranslation } from 'react-i18next';
 
 const AUDIO_URL =
   'https://s3.amazonaws.com/eventtia/event_files/83598/original/mixkit-sleepy-cat-135_1_mp3cut.net.mp3?1629304240';
@@ -10,6 +11,8 @@ const AUDIO_URL =
 export default function TestAudioButton(props: { className?: string }) {
   const [isPlaying, togglePlaying] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  const { t } = useTranslation();
 
   const toggleAudio = () => {
     if (isPlaying) {
@@ -33,7 +36,7 @@ export default function TestAudioButton(props: { className?: string }) {
     <>
       <audio ref={audioRef} src={AUDIO_URL} />
       <Button className={props.className} onClick={toggleAudio} startIcon={isPlaying ? <Stop /> : <PlayCircleFilled />}>
-        {isPlaying ? 'Stop' : 'Test audio output'}
+        {isPlaying ? t('stop') : t('testAudioOutput')}
       </Button>
     </>
   );

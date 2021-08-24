@@ -10,15 +10,20 @@ import MicOff from '@material-ui/icons/MicOff';
 
 import useLocalAudioToggle from '../../../hooks/useLocalAudioToggle/useLocalAudioToggle';
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
+import { useTranslation } from 'react-i18next';
 
 export default function ToggleAudioButton(props: { disabled?: boolean; className?: string; fab?: boolean }) {
   const [isAudioEnabled, toggleAudioEnabled] = useLocalAudioToggle();
   const { localTracks } = useVideoContext();
   const hasAudioTrack = localTracks.some(track => track.kind === 'audio');
+  const { t } = useTranslation();
 
   if (props.fab)
     return (
-      <Tooltip title={!hasAudioTrack ? 'No Audio' : isAudioEnabled ? 'Mute' : 'Unmute'} placement="top">
+      <Tooltip
+        title={(!hasAudioTrack ? t('noAudio') : isAudioEnabled ? t('mute') : t('unmute')) as string}
+        placement="top"
+      >
         <Fab
           className={props.className}
           onClick={toggleAudioEnabled}
@@ -37,7 +42,7 @@ export default function ToggleAudioButton(props: { disabled?: boolean; className
       startIcon={isAudioEnabled ? <Mic /> : <MicOff />}
       data-cy-audio-toggle
     >
-      {!hasAudioTrack ? 'No Audio' : isAudioEnabled ? 'Mute' : 'Unmute'}
+      {!hasAudioTrack ? t('noAudio') : isAudioEnabled ? t('mute') : t('unmute')}
     </Button>
   );
 }
