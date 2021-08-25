@@ -7,6 +7,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
 import { useTranslation } from 'react-i18next';
+import useQuery from '../../../hooks/useQuery/useQuery';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,7 +52,8 @@ const AddGuestDialog = ({ onClose }) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const location = window.location;
-  const guestLink = `${location.protocol}//${location.host}${location.pathname}`;
+  const { locale = 'en' } = useQuery();
+  const guestLink = `${location.protocol}//${location.host}${location.pathname}?locale=${locale}`;
   const copyLink = () => {
     const copyText = document.getElementById(INPUT_ID);
     copyText.disabled = false;
