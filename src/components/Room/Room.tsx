@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) => {
       display: 'grid',
       gridTemplateColumns: `1fr ${theme.sidebarWidth}px`,
       gridTemplateRows: '100%',
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('xs')]: {
         gridTemplateColumns: `100%`,
         gridTemplateRows: `calc(100% - ${totalMobileSidebarHeight}) ${totalMobileSidebarHeight}`,
       },

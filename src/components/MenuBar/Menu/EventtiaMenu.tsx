@@ -81,7 +81,7 @@ export default function EventtiaMenu(props: { buttonClassName?: string; fab?: bo
           horizontal: 'left',
         }}
         transformOrigin={{
-          vertical: isMobile ? -55 : 'bottom',
+          vertical: /*isMobile ? -55 : */ 'bottom',
           horizontal: 'center',
         }}
       >

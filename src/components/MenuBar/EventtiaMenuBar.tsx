@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme: Theme) =>
         // height: `${theme.mobileFooterHeight}px`,
         padding: '1em 0',
       },
+      [theme.breakpoints.down('xs')]: {
+        bottom: theme.sidebarMobileHeight,
+      },
     },
     screenShareBanner: {
       position: 'fixed',
@@ -74,7 +77,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     fab: {
-      margin: '0 1em',
+      margin: '0 0.5em',
       width: '3.5em',
       height: '3.5em',
     },
@@ -103,15 +106,9 @@ export default function EventtiaMenuBar() {
             )}
             {!smallScreen && <AddGuestButton fab className={classes.fab} />}
             <EndCallButton fab className={classes.fab} />
-          </Grid>
-        </Grid>
-        {/* <Hidden smDown> */}
-        <Grid style={{ flex: 1 }}>
-          <Grid container justifyContent="flex-end">
             <Menu fab buttonClassName={classes.fab} />
           </Grid>
         </Grid>
-        {/* </Hidden> */}
       </Grid>
     </footer>
   );

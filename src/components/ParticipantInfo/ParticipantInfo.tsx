@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
       border: `${theme.participantBorderWidth}px solid rgb(245, 248, 255)`,
       paddingTop: `calc(${(9 / 16) * 100}% - ${theme.participantBorderWidth}px)`,
       background: 'black',
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('xs')]: {
         height: theme.sidebarMobileHeight,
         width: `${(theme.sidebarMobileHeight * 16) / 9}px`,
         marginRight: '8px',
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: 'black',
+      background: '#333',
       position: 'absolute',
       top: 0,
       right: 0,

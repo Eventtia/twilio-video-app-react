@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: 'auto',
       width: 'calc(100% - 40px)',
       margin: 'auto',
-      maxWidth: '400px',
+      maxWidth: '450px',
     },
   },
   swooshContainer: {
