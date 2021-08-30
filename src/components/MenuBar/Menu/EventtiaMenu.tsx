@@ -21,6 +21,7 @@ import useFlipCameraToggle from '../../../hooks/useFlipCameraToggle/useFlipCamer
 import useFullScreenToggle from '../../../hooks/useFullScreenToggle/useFullScreenToggle';
 import AddGuestButton from '../../Buttons/AddGuestButton/AddGuestButton';
 import { useTranslation } from 'react-i18next';
+import fscreen from 'fscreen';
 
 export const IconContainer = styled('div')({
   display: 'flex',
@@ -103,10 +104,12 @@ export default function EventtiaMenu(props: { buttonClassName?: string; fab?: bo
             <Typography variant="body1">{t('flipCamera')}</Typography>
           </MenuItem>
         )}
-        <MenuItem onClick={toggleFullScreen}>
-          <IconContainer>{isFullScreen ? <FullscreenExitIcon /> : <FullscreenIcon />}</IconContainer>
-          <Typography variant="body1">{isFullScreen ? t('exitFullScreen') : t('fullScreen')}</Typography>
-        </MenuItem>
+        {fscreen.fullscreenEnabled && (
+          <MenuItem onClick={toggleFullScreen}>
+            <IconContainer>{isFullScreen ? <FullscreenExitIcon /> : <FullscreenIcon />}</IconContainer>
+            <Typography variant="body1">{isFullScreen ? t('exitFullScreen') : t('fullScreen')}</Typography>
+          </MenuItem>
+        )}
         <MenuItem onClick={() => setSettingsOpen(true)}>
           <IconContainer>
             <SettingsIcon />
