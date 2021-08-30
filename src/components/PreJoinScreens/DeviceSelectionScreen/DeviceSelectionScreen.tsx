@@ -39,11 +39,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('sm')]: {
       width: '45%',
     },
+    ['@media screen and (max-width: 400px)']: {
+      width: '100%',
+    },
   },
   localPreviewContainer: {
     paddingRight: '2em',
     [theme.breakpoints.down('sm')]: {
-      padding: '0 2.5em',
+      padding: '0 3.5em',
+    },
+    ['@media screen and (max-width: 400px)']: {
+      padding: '0 2em',
     },
   },
   joinButtons: {
