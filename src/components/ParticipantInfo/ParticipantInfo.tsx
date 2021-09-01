@@ -92,7 +92,6 @@ const useStyles = makeStyles((theme: Theme) =>
     screenShareIconContainer: {
       background: 'rgba(0, 0, 0, 0.5)',
       padding: '0.18em 0.3em',
-      marginRight: '0.3em',
       display: 'flex',
       '& path': {
         fill: 'white',

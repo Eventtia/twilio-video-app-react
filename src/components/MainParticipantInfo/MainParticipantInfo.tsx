@@ -55,9 +55,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   fullWidth: {
     gridArea: '1 / 1 / 2 / 3',
-    // [theme.breakpoints.down('sm')]: {
-    //   gridArea: '1 / 1 / 3 / 3',
-    // },
+    [theme.breakpoints.down('sm')]: {
+      gridArea: '1 / 1 / 3 / 3',
+    },
   },
   avatarContainer: {
     display: 'flex',
@@ -146,9 +146,9 @@ export default function MainParticipantInfo({ participant, children }: MainParti
     <div
       data-cy-main-participant
       data-cy-participant={participant.identity}
-      className={clsx(classes.container, {
+      className={clsx(classes.container /*, {
         [classes.fullWidth]: !isRemoteParticipantScreenSharing,
-      })}
+      }*/)}
     >
       <div className={classes.infoContainer}>
         <div style={{ display: 'flex' }}>
