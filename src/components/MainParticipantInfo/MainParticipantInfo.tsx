@@ -146,9 +146,9 @@ export default function MainParticipantInfo({ participant, children }: MainParti
     <div
       data-cy-main-participant
       data-cy-participant={participant.identity}
-      className={clsx(classes.container /*, {
+      className={clsx(classes.container, {
         [classes.fullWidth]: !isRemoteParticipantScreenSharing,
-      }*/)}
+      })}
     >
       <div className={classes.infoContainer}>
         <div style={{ display: 'flex' }}>
