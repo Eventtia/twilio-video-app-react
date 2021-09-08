@@ -30,9 +30,11 @@ export default function EndCallButton(props: { className?: string; fab?: boolean
   if (props.fab)
     return (
       <Tooltip title={t('disconnect') as string} placement="top">
-        <Fab className={clsx(classes.button, props.className)} onClick={() => room!.disconnect()} data-cy-disconnect>
-          <CallEnd />
-        </Fab>
+        <div>
+          <Fab className={clsx(classes.button, props.className)} onClick={() => room!.disconnect()} data-cy-disconnect>
+            <CallEnd />
+          </Fab>
+        </div>
       </Tooltip>
     );
   return (

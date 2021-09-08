@@ -31,9 +31,11 @@ export default function ToggleVideoButton(props: { disabled?: boolean; className
         title={(!hasVideoInputDevices ? t('noVideo') : isVideoEnabled ? t('stopVideo') : t('startVideo')) as string}
         placement="top"
       >
-        <Fab className={props.className} onClick={toggleVideo} disabled={!hasVideoInputDevices || props.disabled}>
-          {isVideoEnabled ? <Videocam /> : <VideocamOff />}
-        </Fab>
+        <div>
+          <Fab className={props.className} onClick={toggleVideo} disabled={!hasVideoInputDevices || props.disabled}>
+            {isVideoEnabled ? <Videocam /> : <VideocamOff />}
+          </Fab>
+        </div>
       </Tooltip>
     );
   return (

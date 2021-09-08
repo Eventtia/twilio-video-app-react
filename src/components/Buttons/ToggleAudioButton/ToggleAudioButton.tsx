@@ -24,14 +24,16 @@ export default function ToggleAudioButton(props: { disabled?: boolean; className
         title={(!hasAudioTrack ? t('noAudio') : isAudioEnabled ? t('mute') : t('unmute')) as string}
         placement="top"
       >
-        <Fab
-          className={props.className}
-          onClick={toggleAudioEnabled}
-          disabled={!hasAudioTrack || props.disabled}
-          data-cy-audio-toggle
-        >
-          {isAudioEnabled ? <Mic /> : <MicOff />}
-        </Fab>
+        <div>
+          <Fab
+            className={props.className}
+            onClick={toggleAudioEnabled}
+            disabled={!hasAudioTrack || props.disabled}
+            data-cy-audio-toggle
+          >
+            {isAudioEnabled ? <Mic /> : <MicOff />}
+          </Fab>
+        </div>
       </Tooltip>
     );
   return (

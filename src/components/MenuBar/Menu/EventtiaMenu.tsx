@@ -47,14 +47,16 @@ export default function EventtiaMenu(props: { buttonClassName?: string; fab?: bo
     <>
       {props.fab ? (
         <Tooltip title={t('more') as string} placement="top">
-          <Fab
-            ref={anchorRef}
-            onClick={() => setMenuOpen(isOpen => !isOpen)}
-            className={props.buttonClassName}
-            data-cy-more-button
-          >
-            <MoreIcon />
-          </Fab>
+          <div>
+            <Fab
+              ref={anchorRef}
+              onClick={() => setMenuOpen(isOpen => !isOpen)}
+              className={props.buttonClassName}
+              data-cy-more-button
+            >
+              <MoreIcon />
+            </Fab>
+          </div>
         </Tooltip>
       ) : (
         <Button
