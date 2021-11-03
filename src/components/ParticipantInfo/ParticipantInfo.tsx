@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
         width: `${(theme.sidebarMobileHeight * 16) / 9}px`,
         marginRight: '8px',
         marginBottom: '0',
-        fontSize: '10px',
+        fontSize: '12px',
         paddingTop: `${theme.sidebarMobileHeight - 2}px`,
       },
     },
@@ -149,7 +149,7 @@ export default function ParticipantInfo({
   const publications = usePublications(participant);
 
   const audioPublication = publications.find(p => p.kind === 'audio');
-  const videoPublication = publications.find(p => p.trackName.includes('camera'));
+  const videoPublication = publications.find(p => !p.trackName.includes('screen') && p.kind === 'video');
 
   const isVideoEnabled = Boolean(videoPublication);
   const isScreenShareEnabled = publications.find(p => p.trackName.includes('screen'));
