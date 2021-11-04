@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import DeviceSelectionDialog from '../../DeviceSelectionDialog/DeviceSelectionDialog';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import SearchIcon from '@material-ui/icons/Search';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -22,6 +23,8 @@ import useFullScreenToggle from '../../../hooks/useFullScreenToggle/useFullScree
 import AddGuestButton from '../../Buttons/AddGuestButton/AddGuestButton';
 import { useTranslation } from 'react-i18next';
 import fscreen from 'fscreen';
+import { VideoRoomMonitor } from '@twilio/video-room-monitor';
+import useQuery from '../../../hooks/useQuery/useQuery';
 
 export const IconContainer = styled('div')({
   display: 'flex',
@@ -33,6 +36,7 @@ export const IconContainer = styled('div')({
 export default function EventtiaMenu(props: { buttonClassName?: string; fab?: boolean }) {
   const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
   const { t } = useTranslation();
+  const { showMonitor } = useQuery();
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -129,6 +133,19 @@ export default function EventtiaMenu(props: { buttonClassName?: string; fab?: bo
               <BackgroundIcon />
             </IconContainer>
             <Typography variant="body1">{t('backgrounds')}</Typography>
+          </MenuItem>
+        )}
+        {!!showMonitor && (
+          <MenuItem
+            onClick={() => {
+              VideoRoomMonitor.toggleMonitor();
+              setMenuOpen(false);
+            }}
+          >
+            <IconContainer>
+              <SearchIcon />
+            </IconContainer>
+            <Typography variant="body1">Room Monitor</Typography>
           </MenuItem>
         )}
       </MenuContainer>
