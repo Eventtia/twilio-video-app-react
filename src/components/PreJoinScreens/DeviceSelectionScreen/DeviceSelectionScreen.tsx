@@ -11,6 +11,7 @@ import { useAppState } from '../../../state';
 import useChatContext from '../../../hooks/useChatContext/useChatContext';
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
 import { useTranslation } from 'react-i18next';
+import { decode } from 'js-base64';
 
 const useStyles = makeStyles((theme: Theme) => ({
   gutterBottom: {
@@ -96,7 +97,7 @@ interface DeviceSelectionScreenProps {
   token: string;
 }
 
-const parseToken = (token: string) => (!!token ? JSON.parse(atob(token.split('.')[1])) : {});
+const parseToken = (token: string) => (!!token ? JSON.parse(decode(token.split('.')[1])) : {});
 
 export default function DeviceSelectionScreen({ token }: DeviceSelectionScreenProps) {
   const classes = useStyles();
@@ -106,7 +107,9 @@ export default function DeviceSelectionScreen({ token }: DeviceSelectionScreenPr
   const disableButtons = isFetching || isAcquiringLocalTracks || isConnecting;
   const { t } = useTranslation();
 
-  const { name } = parseToken(token);
+  const {
+    grants: { identity: name },
+  } = parseToken(token);
 
   const handleJoin = () => {
     // getToken(name, roomName).then(({ token??? }) => {

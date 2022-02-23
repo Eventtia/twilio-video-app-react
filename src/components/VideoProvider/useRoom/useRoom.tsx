@@ -2,12 +2,14 @@ import { Callback } from '../../../types';
 import { isMobile } from '../../../utils';
 import Video, { ConnectOptions, LocalTrack, Room } from 'twilio-video';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { decode } from 'js-base64';
 
 // @ts-ignore
 window.TwilioVideo = Video;
 
 const getEndDateFromToken = (token: string) => {
-  const { exp } = JSON.parse(atob(token.split('.')[1]));
+  const { exp } = JSON.parse(decode(token.split('.')[1]));
+
   return new Date(exp * 1000);
 };
 
