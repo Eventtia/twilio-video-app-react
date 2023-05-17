@@ -19,8 +19,8 @@ export enum Steps {
 export default function PreJoinScreens() {
   const { user } = useAppState();
   const { getAudioAndVideoTracks } = useVideoContext();
+  // const { URLRoomName } = useParams<{ URLRoomName?: string }>();
 
-  // const { URLRoomName } = useParams();
   const { token: queryToken, locale } = useQuery();
 
   const [token, setToken] = useState(queryToken || '');
@@ -84,7 +84,8 @@ export default function PreJoinScreens() {
   // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
   //   event.preventDefault();
   //   // If this app is deployed as a twilio function, don't change the URL because routing isn't supported.
-  //   if (!window.location.origin.includes('twil.io')) {
+  //   // @ts-ignore
+  //   if (!window.location.origin.includes('twil.io') && !window.STORYBOOK_ENV) {
   //     window.history.replaceState(null, '', window.encodeURI(`/room/${roomName}${window.location.search || ''}`));
   //   }
   //   setStep(Steps.deviceSelectionStep);

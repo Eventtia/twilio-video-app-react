@@ -5,7 +5,7 @@ import { LocalAudioTrack, LocalVideoTrack, Participant, RemoteAudioTrack, Remote
 
 import AudioLevelIndicator from '../AudioLevelIndicator/AudioLevelIndicator';
 import AvatarIcon from '../../icons/AvatarIcon';
-// import NetworkQualityLevel from '../NetworkQualityLevel/NetworkQualityLevel';
+import NetworkQualityLevel from '../NetworkQualityLevel/NetworkQualityLevel';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
@@ -126,7 +126,7 @@ export default function MainParticipantInfo({ participant, children }: MainParti
   const isRemoteParticipantScreenSharing = screenShareParticipant && screenShareParticipant !== localParticipant;
 
   const publications = usePublications(participant);
-  const videoPublication = publications.find(p => p.trackName.includes('camera'));
+  const videoPublication = publications.find(p => !p.trackName.includes('screen') && p.kind === 'video');
   const screenSharePublication = publications.find(p => p.trackName.includes('screen'));
 
   const videoTrack = useTrack(screenSharePublication || videoPublication);
@@ -160,7 +160,7 @@ export default function MainParticipantInfo({ participant, children }: MainParti
               {screenSharePublication && t('screen')}
             </Typography>
           </div>
-          {/* <NetworkQualityLevel participant={localParticipant} /> */}
+          <NetworkQualityLevel participant={participant} />
         </div>
         {isRecording && (
           <Tooltip
