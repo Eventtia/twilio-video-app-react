@@ -45,6 +45,7 @@
     "react-i18next": "^11.11.4",
     "react-router-dom": "^5.1.2",
     "react-scripts": "5.0.0",
+    "react-spring": "^9.7.1",
     "rimraf": "3.0.2",
     "strip-color": "^0.1.0",
     "swiper": "^8.1.5",
