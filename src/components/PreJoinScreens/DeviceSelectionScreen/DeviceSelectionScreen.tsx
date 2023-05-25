@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   localPreviewContainer: {
     paddingRight: '2em',
-    marginBottom: '2em',
+    // marginBottom: '2em',
     [theme.breakpoints.down('sm')]: {
       padding: '0 3.5em',
     },
@@ -212,7 +212,7 @@ export default function DeviceSelectionScreen({ token }: DeviceSelectionScreenPr
           </Grid>
         </Grid>
 
-        <Grid item md={12} sm={12} xs={12}>
+        {/* <Grid item md={12} sm={12} xs={12}>
           {isKrispInstalled && (
             <Grid
               container
@@ -254,7 +254,7 @@ export default function DeviceSelectionScreen({ token }: DeviceSelectionScreenPr
             </Grid>
           )}
           <Divider />
-        </Grid>
+        </Grid> */}
       </Grid>
     </>
   );
