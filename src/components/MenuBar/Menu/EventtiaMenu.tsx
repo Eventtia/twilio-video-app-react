@@ -144,7 +144,7 @@ export default function EventtiaMenu(props: { buttonClassName?: string; fab?: bo
           <IconContainer>
             <SearchIcon style={{ fill: '#707578', width: '0.9em' }} />
           </IconContainer>
-          <Typography variant="body1">Room Monitor</Typography>
+          <Typography variant="body1">{t('roomMonitor')}</Typography>
         </MenuItem>
 
         <MenuItem
@@ -160,7 +160,7 @@ export default function EventtiaMenu(props: { buttonClassName?: string; fab?: bo
               <GridViewIcon style={{ fill: '#707578', width: '0.9em' }} />
             )}
           </IconContainer>
-          <Typography variant="body1">{isGalleryViewActive ? 'Speaker View' : 'Gallery View'}</Typography>
+          <Typography variant="body1">{isGalleryViewActive ? t('speakerView') : t('galleryView')}</Typography>
         </MenuItem>
       </MenuContainer>
       <DeviceSelectionDialog

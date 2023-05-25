@@ -112,10 +112,10 @@ export default function DeviceSelectionDialog({ open, onClose }: { open: boolean
           {isKrispInstalled && (
             <div className={classes.noiseCancellationContainer}>
               <div className={classes.krispContainer}>
-                <Typography variant="subtitle2">Noise Cancellation powered by </Typography>
+                <Typography variant="subtitle2">{t('noiseCancellationPoweredBy') as string} </Typography>
                 <KrispLogo />
                 <Tooltip
-                  title="Suppress background noise from your microphone"
+                  title={t('suppressBackgroundNoise') as string}
                   interactive
                   leaveDelay={250}
                   leaveTouchDelay={15000}
@@ -135,7 +135,7 @@ export default function DeviceSelectionDialog({ open, onClose }: { open: boolean
                     onClick={toggleKrisp}
                   />
                 }
-                label={isKrispEnabled ? 'Enabled' : 'Disabled'}
+                label={isKrispEnabled ? t('enabled') : t('disabled')}
                 style={{ marginRight: 0 }}
                 disabled={isAcquiringLocalTracks}
               />
@@ -143,7 +143,7 @@ export default function DeviceSelectionDialog({ open, onClose }: { open: boolean
           )}
           {isKrispInstalled && (
             <Typography variant="body1" color="textSecondary" className={classes.krispInfoText}>
-              Suppress background noise from your microphone.
+              {t('suppressBackgroundNoise')}.
             </Typography>
           )}
 
@@ -159,7 +159,7 @@ export default function DeviceSelectionDialog({ open, onClose }: { open: boolean
           <Divider />
           <div className={classes.listSection}>
             <Typography variant="h6" className={classes.headline}>
-              Gallery View
+              {t('galleryView')}
             </Typography>
             <MaxGalleryViewParticipants />
           </div>
