@@ -3,12 +3,14 @@ import { isMobile } from '../../../utils';
 import Video, { ConnectOptions, LocalTrack, Room } from 'twilio-video';
 import { VideoRoomMonitor } from '@twilio/video-room-monitor';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { decode } from 'js-base64';
 
 // @ts-ignore
 window.TwilioVideo = Video;
 
 const getEndDateFromToken = (token: string) => {
-  const { exp } = JSON.parse(atob(token.split('.')[1]));
+  const { exp } = JSON.parse(decode(token.split('.')[1]));
+
   return new Date(exp * 1000);
 };
 
@@ -32,9 +34,9 @@ export default function useRoom(localTracks: LocalTrack[], onError: Callback, op
           VideoRoomMonitor.registerVideoRoom(newRoom);
           const disconnect = () => newRoom.disconnect();
 
-          // This app can add up to 13 'participantDisconnected' listeners to the room object, which can trigger
+          // This app can add up to 16 'participantDisconnected' listeners to the room object, which can trigger
           // a warning from the EventEmitter object. Here we increase the max listeners to suppress the warning.
-          newRoom.setMaxListeners(15);
+          newRoom.setMaxListeners(16);
 
           newRoom.once('disconnected', () => {
             // Reset the room only after all other `disconnected` listeners have been called.
