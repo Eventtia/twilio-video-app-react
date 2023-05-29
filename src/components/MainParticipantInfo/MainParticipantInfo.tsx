@@ -5,7 +5,7 @@ import { LocalAudioTrack, LocalVideoTrack, Participant, RemoteAudioTrack, Remote
 
 import AudioLevelIndicator from '../AudioLevelIndicator/AudioLevelIndicator';
 import AvatarIcon from '../../icons/AvatarIcon';
-import NetworkQualityLevel from '../NetworkQualityLevel/NetworkQualityLevel';
+// import NetworkQualityLevel from '../NetworkQualityLevel/NetworkQualityLevel';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
@@ -160,7 +160,7 @@ export default function MainParticipantInfo({ participant, children }: MainParti
               {screenSharePublication && t('screen')}
             </Typography>
           </div>
-          <NetworkQualityLevel participant={participant} />
+          {/* <NetworkQualityLevel participant={participant} /> */}
         </div>
         {isRecording && (
           <Tooltip
