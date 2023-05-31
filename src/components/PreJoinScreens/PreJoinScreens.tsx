@@ -8,7 +8,6 @@ import { useParams } from 'react-router-dom';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 import GuestForm from '../GuestForm/GuestForm';
 import useQuery from '../../hooks/useQuery/useQuery';
-import i18next from 'i18next';
 
 export enum Steps {
   // roomNameStep,
@@ -21,7 +20,7 @@ export default function PreJoinScreens() {
   const { getAudioAndVideoTracks } = useVideoContext();
   // const { URLRoomName } = useParams<{ URLRoomName?: string }>();
 
-  const { token: queryToken, locale } = useQuery();
+  const { token: queryToken } = useQuery();
 
   const [token, setToken] = useState(queryToken || '');
   const [step, setStep] = useState(queryToken ? Steps.deviceSelectionStep : Steps.guestLoginStep);
@@ -61,10 +60,6 @@ export default function PreJoinScreens() {
   //     }
   //   }
   // }, [user, URLRoomName]);
-
-  useEffect(() => {
-    if (locale) i18next.changeLanguage(locale as string);
-  }, [locale]);
 
   useEffect(() => {
     if (token) setStep(Steps.deviceSelectionStep);
