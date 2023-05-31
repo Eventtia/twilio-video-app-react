@@ -18,7 +18,7 @@ import { VideoProvider } from './components/VideoProvider';
 import useConnectionOptions from './utils/useConnectionOptions/useConnectionOptions';
 import UnsupportedBrowserWarning from './components/UnsupportedBrowserWarning/UnsupportedBrowserWarning';
 import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import { initReactI18next, I18nextProvider } from 'react-i18next';
 import locales from './locales';
 
 i18n.use(initReactI18next).init({
@@ -51,25 +51,27 @@ const VideoApp = () => {
 export const ReactApp = () => (
   <MuiThemeProvider theme={theme}>
     <CssBaseline />
-    <UnsupportedBrowserWarning>
+    <I18nextProvider i18n={i18n} defaultNS={'translation'}>
       <Router>
-        <AppStateProvider>
-          <Switch>
-            <PrivateRoute exact path="/">
-              <h1>Invalid route</h1>
-            </PrivateRoute>
-            {/* <PrivateRoute path="/room/:URLRoomName"> */}
-            <PrivateRoute path="/room/:eventUri/:conference/:meeting">
-              <VideoApp />
-            </PrivateRoute>
-            {/* <Route path="/login">
-              <LoginPage />
-            </Route> */}
-            <Redirect to="/" />
-          </Switch>
-        </AppStateProvider>
+        <UnsupportedBrowserWarning>
+          <AppStateProvider>
+            <Switch>
+              <PrivateRoute exact path="/">
+                <h1>Invalid route</h1>
+              </PrivateRoute>
+              {/* <PrivateRoute path="/room/:URLRoomName"> */}
+              <PrivateRoute path="/room/:eventUri/:conference/:meeting">
+                <VideoApp />
+              </PrivateRoute>
+              {/* <Route path="/login">
+                <LoginPage />
+              </Route> */}
+              <Redirect to="/" />
+            </Switch>
+          </AppStateProvider>
+        </UnsupportedBrowserWarning>
       </Router>
-    </UnsupportedBrowserWarning>
+    </I18nextProvider>
   </MuiThemeProvider>
 );
 

@@ -15,6 +15,7 @@ import ToggleAudioButton from '../Buttons/ToggleAudioButton/ToggleAudioButton';
 import ToggleVideoButton from '../Buttons/ToggleVideoButton/ToggleVideoButton';
 import ToggleScreenShareButton from '../Buttons/ToogleScreenShareButton/ToggleScreenShareButton';
 import AddGuestButton from '../Buttons/AddGuestButton/AddGuestButton';
+import { useAppState } from '../../state';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,12 +40,22 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       padding: '1em 1.43em',
       zIndex: 10,
+      [theme.breakpoints.up('md')]: {
+        '&.galleryViewMenuBar': {
+          bottom: -theme.spacing(1),
+        },
+      },
       [theme.breakpoints.down('sm')]: {
         // height: `${theme.mobileFooterHeight}px`,
         padding: '1em 0',
+        '&.galleryViewMenuBar': {
+          bottom: theme.spacing(4),
+        },
       },
       [theme.breakpoints.down('xs')]: {
-        bottom: theme.sidebarMobileHeight,
+        '&:not(.galleryViewMenuBar)': {
+          bottom: theme.sidebarMobileHeight,
+        },
       },
     },
     screenShareBanner: {
@@ -93,9 +104,10 @@ export default function EventtiaMenuBar() {
   const isUserActive = useIsUserActive();
   const smallScreen = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
   const showControls = true || isUserActive || smallScreen;
+  const { isGalleryViewActive: galleryViewMenuBar } = useAppState();
 
   return (
-    <footer className={clsx(classes.container, { showControls })}>
+    <footer className={clsx(classes.container, { showControls, galleryViewMenuBar })}>
       <Grid container justifyContent="space-around" alignItems="center">
         <Grid item>
           <Grid container justifyContent="center">
