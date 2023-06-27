@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
 
 // const defaultHost = 'http://localhost:3002';
 // const defaultHost = 'https://connect.eventtia.com';
-const defaultHost = 'https://dev.eventtia.com';
+const defaultHost = 'https://dev-fg.eventtia.com';
 const eventtiaHost = process.env.REACT_APP_EVENTTIA_HOST || defaultHost;
 
 const GuestForm = ({ setToken }) => {

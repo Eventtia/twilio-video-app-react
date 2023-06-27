@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   content: {
     background: 'white',
     width: '100%',
-    padding: '4em',
+    padding: '3em 4em',
     flex: 1,
     overflow: 'auto',
     [theme.breakpoints.down('sm')]: {

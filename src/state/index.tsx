@@ -4,8 +4,9 @@ import { TwilioError } from 'twilio-video';
 import { settingsReducer, initialSettings, Settings, SettingsAction } from './settings/settingsReducer';
 import useActiveSinkId from './useActiveSinkId/useActiveSinkId';
 import useFirebaseAuth from './useFirebaseAuth/useFirebaseAuth';
+import { useLocalStorageState } from '../hooks/useLocalStorageState/useLocalStorageState';
 import usePasscodeAuth from './usePasscodeAuth/usePasscodeAuth';
-import { User } from 'firebase';
+import { User } from 'firebase/auth';
 
 export interface StateContextType {
   error: TwilioError | Error | null;
@@ -22,6 +23,14 @@ export interface StateContextType {
   dispatchSetting: React.Dispatch<SettingsAction>;
   roomType?: RoomType;
   updateRecordingRules(room_sid: string, rules: RecordingRules): Promise<object>;
+  isGalleryViewActive: boolean;
+  setIsGalleryViewActive: React.Dispatch<React.SetStateAction<boolean>>;
+  maxGalleryViewParticipants: number;
+  setMaxGalleryViewParticipants: React.Dispatch<React.SetStateAction<number>>;
+  isKrispEnabled: boolean;
+  setIsKrispEnabled: React.Dispatch<React.SetStateAction<boolean>>;
+  isKrispInstalled: boolean;
+  setIsKrispInstalled: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const StateContext = createContext<StateContextType>(null!);
@@ -38,9 +47,17 @@ export const StateContext = createContext<StateContextType>(null!);
 export default function AppStateProvider(props: React.PropsWithChildren<{}>) {
   const [error, setError] = useState<TwilioError | null>(null);
   const [isFetching, setIsFetching] = useState(false);
+  const [isGalleryViewActive, setIsGalleryViewActive] = useLocalStorageState('gallery-view-active-key', true);
   const [activeSinkId, setActiveSinkId] = useActiveSinkId();
   const [settings, dispatchSetting] = useReducer(settingsReducer, initialSettings);
   const [roomType, setRoomType] = useState<RoomType>();
+  const [maxGalleryViewParticipants, setMaxGalleryViewParticipants] = useLocalStorageState(
+    'max-gallery-participants-key',
+    6
+  );
+
+  const [isKrispEnabled, setIsKrispEnabled] = useState(false);
+  const [isKrispInstalled, setIsKrispInstalled] = useState(false);
 
   let contextValue = {
     error,
@@ -51,6 +68,14 @@ export default function AppStateProvider(props: React.PropsWithChildren<{}>) {
     settings,
     dispatchSetting,
     roomType,
+    isGalleryViewActive,
+    setIsGalleryViewActive,
+    maxGalleryViewParticipants,
+    setMaxGalleryViewParticipants,
+    isKrispEnabled,
+    setIsKrispEnabled,
+    isKrispInstalled,
+    setIsKrispInstalled,
   } as StateContextType;
 
   if (process.env.REACT_APP_SET_AUTH === 'firebase') {

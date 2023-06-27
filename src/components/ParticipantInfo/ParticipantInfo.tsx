@@ -15,10 +15,14 @@ import usePublications from '../../hooks/usePublications/usePublications';
 import useTrack from '../../hooks/useTrack/useTrack';
 import useParticipantIsReconnecting from '../../hooks/useParticipantIsReconnecting/useParticipantIsReconnecting';
 import { useTranslation } from 'react-i18next';
+import { useAppState } from '../../state';
+
+const borderWidth = 2;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
+      isolation: 'isolate',
       position: 'relative',
       display: 'flex',
       alignItems: 'center',
@@ -26,7 +30,6 @@ const useStyles = makeStyles((theme: Theme) =>
       overflow: 'hidden',
       marginBottom: '0.5em',
       '& video': {
-        filter: 'none',
         objectFit: 'contain !important',
       },
       borderRadius: '8px',
@@ -38,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
         width: `${(theme.sidebarMobileHeight * 16) / 9}px`,
         marginRight: '8px',
         marginBottom: '0',
-        fontSize: '10px',
+        fontSize: '12px',
         paddingTop: `${theme.sidebarMobileHeight - 2}px`,
       },
     },
@@ -100,7 +103,7 @@ const useStyles = makeStyles((theme: Theme) =>
     identity: {
       background: 'linear-gradient(to right, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0))',
       color: 'white',
-      padding: '0.18em 0.3em',
+      padding: '0.18em 0.3em 0.18em 0',
       margin: 0,
       display: 'flex',
       alignItems: 'center',
@@ -114,7 +117,7 @@ const useStyles = makeStyles((theme: Theme) =>
       left: 0,
       right: 0,
     },
-    typeography: {
+    typography: {
       color: 'white',
       [theme.breakpoints.down('sm')]: {
         fontSize: '0.75rem',
@@ -126,6 +129,24 @@ const useStyles = makeStyles((theme: Theme) =>
     cursorPointer: {
       cursor: 'pointer',
     },
+    galleryView: {
+      border: `${theme.participantBorderWidth}px solid ${theme.galleryViewBackgroundColor}`,
+      borderRadius: '8px',
+      [theme.breakpoints.down('sm')]: {
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+        padding: '0',
+        fontSize: '12px',
+        margin: '0',
+        '& video': {
+          objectFit: 'cover !important',
+        },
+      },
+    },
+    dominantSpeaker: {
+      border: `solid ${borderWidth}px #7BEAA5`,
+    },
   })
 );
 
@@ -136,6 +157,7 @@ interface ParticipantInfoProps {
   isSelected?: boolean;
   isLocalParticipant?: boolean;
   hideParticipant?: boolean;
+  isDominantSpeaker?: boolean;
 }
 
 export default function ParticipantInfo({
@@ -145,11 +167,12 @@ export default function ParticipantInfo({
   children,
   isLocalParticipant,
   hideParticipant,
+  isDominantSpeaker,
 }: ParticipantInfoProps) {
   const publications = usePublications(participant);
 
   const audioPublication = publications.find(p => p.kind === 'audio');
-  const videoPublication = publications.find(p => p.trackName.includes('camera'));
+  const videoPublication = publications.find(p => !p.trackName.includes('screen') && p.kind === 'video');
 
   const isVideoEnabled = Boolean(videoPublication);
   const isScreenShareEnabled = publications.find(p => p.trackName.includes('screen'));
@@ -160,6 +183,8 @@ export default function ParticipantInfo({
   const audioTrack = useTrack(audioPublication) as LocalAudioTrack | RemoteAudioTrack | undefined;
   const isParticipantReconnecting = useParticipantIsReconnecting(participant);
 
+  const { isGalleryViewActive } = useAppState();
+
   const classes = useStyles();
 
   const { t } = useTranslation();
@@ -169,6 +194,8 @@ export default function ParticipantInfo({
       className={clsx(classes.container, {
         [classes.hideParticipant]: hideParticipant,
         [classes.cursorPointer]: Boolean(onClick),
+        [classes.dominantSpeaker]: isDominantSpeaker,
+        [classes.galleryView]: isGalleryViewActive,
       })}
       onClick={onClick}
       data-cy-participant={participant.identity}
@@ -183,7 +210,7 @@ export default function ParticipantInfo({
           )}
           <span className={classes.identity}>
             <AudioLevelIndicator audioTrack={audioTrack} />
-            <Typography variant="body1" className={classes.typeography} component="span">
+            <Typography variant="body1" className={classes.typography} component="span">
               {participant.identity}
               {isLocalParticipant && t('you')}
             </Typography>
@@ -199,7 +226,7 @@ export default function ParticipantInfo({
         )}
         {isParticipantReconnecting && (
           <div className={classes.reconnectingContainer}>
-            <Typography variant="body1" className={classes.typeography}>
+            <Typography variant="body1" className={classes.typography}>
               {t('reconnecting')}
             </Typography>
           </div>

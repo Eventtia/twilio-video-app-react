@@ -40,6 +40,20 @@ const locales = {
       reconnecting: 'Reconnecting...',
       defaultAudioOutput: 'System Default Audio Output',
       screen: ' - Screen',
+      noiseCancellationPoweredBy: 'Noise Cancellation powered by',
+      suppressBackgroundNoise: 'Suppress background noise from your microphone',
+      enabled: 'Enabled',
+      disabled: 'Disabled',
+      galleryView: 'Gallery View',
+      speakerView: 'Speaker View',
+      maxGalleryViewParticipants: 'Max Gallery View Participants',
+      roomMonitor: 'Room Monitor',
+      unsupportedBrowser: {
+        title: 'Browser or context not supported',
+        pleaseOpenInSupported: 'Please open this application in one of the <1>supported browsers</1>.',
+        useSecureConnection:
+          'If you are using a supported browser, please ensure that this app is served over a <1>secure context</1> (e.g. https or localhost).',
+      },
     },
   },
   es: {
@@ -83,6 +97,20 @@ const locales = {
       reconnecting: 'Volviendo a conectar…',
       defaultAudioOutput: 'Salida de audio por defecto del sistema',
       screen: ' - Pantalla',
+      noiseCancellationPoweredBy: 'Cancelación de ruido desarrollada por',
+      suppressBackgroundNoise: 'Suprime el ruido de fondo de tu micrófono',
+      enabled: 'Habilitado',
+      disabled: 'Deshabilitado',
+      galleryView: 'Vista de galería',
+      speakerView: 'Vista de orador',
+      maxGalleryViewParticipants: 'Máximo de participantes en la vista de galería',
+      roomMonitor: 'Monitor de la sala',
+      unsupportedBrowser: {
+        title: 'El navegador o el contexto no son compatibles',
+        pleaseOpenInSupported: 'Abra esta aplicación en uno de los <1>navegadores compatibles</1>.',
+        useSecureConnection:
+          'Si utiliza un navegador compatible, asegúrese de que esta aplicación se muestre en un <1>contexto seguro</1> (por ejemplo, https o localhost).',
+      },
     },
   },
   fr: {
@@ -127,6 +155,20 @@ const locales = {
       reconnecting: 'Se reconnecter',
       defaultAudioOutput: 'Sortie audio par défaut du système',
       screen: ' - Écran',
+      noiseCancellationPoweredBy: 'Suppression du bruit alimentée par',
+      suppressBackgroundNoise: 'Supprimez le bruit de fond de votre microphone',
+      enabled: 'Activé',
+      disabled: 'Désactivé',
+      galleryView: 'Affichage de la galerie',
+      speakerView: "Vue de l'intervenant",
+      maxGalleryViewParticipants: 'Nombre maximum de participants dans la galerie',
+      roomMonitor: 'Moniteur de salle',
+      unsupportedBrowser: {
+        title: 'Navigateur ou contexte non pris en charge',
+        pleaseOpenInSupported: "Ouvrez cette application dans l'un des <1>navigateurs compatibles</1>.",
+        useSecureConnection:
+          'Si vous utilisez un navigateur compatible, assurez-vous que cette application est diffusée dans un <1>contexte sécurisé</1> (par exemple https ou localhost).',
+      },
     },
   },
   pt: {
@@ -170,6 +212,20 @@ const locales = {
       reconnecting: 'Reconectando …',
       defaultAudioOutput: 'Saída áudio por defeito do sistema',
       screen: ' - Tela',
+      noiseCancellationPoweredBy: 'Cancelamento de ruído alimentado por',
+      suppressBackgroundNoise: 'Suprima o ruído de fundo do seu microfone',
+      enabled: 'Habilitado',
+      disabled: 'Desabilitado',
+      galleryView: 'Visualização da Galeria',
+      speakerView: 'Visualização do alto-falante',
+      maxGalleryViewParticipants: 'Participantes máximos da exibição da galeria',
+      roomMonitor: 'Monitor de Sala',
+      unsupportedBrowser: {
+        title: 'Navegador ou contexto não suportados',
+        pleaseOpenInSupported: 'Abra este aplicativo em um dos <1>navegadores compatíveis</1>.',
+        useSecureConnection:
+          'Se você estiver usando um navegador compatível, certifique-se de que este aplicativo seja servido em um <1>contexto seguro</1> (por exemplo, https ou localhost).',
+      },
     },
   },
 };

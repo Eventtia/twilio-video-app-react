@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useEffect, useRef, useState } from 'react';
 import { Client } from '@twilio/conversations';
-import { Conversation } from '@twilio/conversations/lib/conversation';
-import { Message } from '@twilio/conversations/lib/message';
+import { Conversation } from '@twilio/conversations/';
+import { Message } from '@twilio/conversations/';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 
 type ChatContextType = {
@@ -26,15 +26,23 @@ export const ChatProvider: React.FC = ({ children }) => {
 
   const connect = useCallback(
     (token: string) => {
-      Client.create(token)
-        .then(client => {
-          //@ts-ignore
+      const client = new Client(token);
+
+      const handleClientInitialized = (state: string) => {
+        if (state === 'initialized') {
+          // @ts-ignore
           window.chatClient = client;
           setChatClient(client);
-        })
-        .catch(() => {
+        } else if (state === 'failed') {
           onError(new Error("There was a problem connecting to Twilio's conversation service."));
-        });
+        }
+      };
+
+      client.on('stateChanged', handleClientInitialized);
+
+      return () => {
+        client.off('stateChanged', handleClientInitialized);
+      };
     },
     [onError]
   );
@@ -71,7 +79,8 @@ export const ChatProvider: React.FC = ({ children }) => {
           window.chatConversation = newConversation;
           setConversation(newConversation);
         })
-        .catch(() => {
+        .catch(e => {
+          console.error(e);
           onError(new Error('There was a problem getting the Conversation associated with this room.'));
         });
     }
