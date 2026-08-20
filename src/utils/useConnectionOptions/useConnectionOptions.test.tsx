@@ -24,9 +24,9 @@ describe('the useConnectionOptions function', () => {
         },
       },
       dominantSpeaker: true,
-      maxAudioBitrate: 0,
       networkQuality: { local: 1, remote: 1 },
       preferredVideoCodecs: 'auto',
+      receiveTranscriptions: true,
     };
 
     mockUseAppState.mockImplementationOnce(() => ({ settings }));
@@ -54,9 +54,9 @@ describe('the useConnectionOptions function', () => {
         },
       },
       dominantSpeaker: true,
-      maxAudioBitrate: 0,
       networkQuality: { local: 1, remote: 1 },
       preferredVideoCodecs: 'auto',
+      receiveTranscriptions: true,
     };
 
     mockUseAppState.mockImplementationOnce(() => ({ settings }));

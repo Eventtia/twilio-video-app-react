@@ -13,6 +13,7 @@ import { ParticipantAudioTracks } from '../ParticipantAudioTracks/ParticipantAud
 import { useAppState } from '../../state';
 import useScreenShareParticipant from '../../hooks/useScreenShareParticipant/useScreenShareParticipant';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
+import TranscriptionsOverlay from '../TranscriptionsOverlay/TranscriptionsOverlay';
 
 const useStyles = makeStyles((theme: Theme) => {
   const totalMobileSidebarHeight = `${theme.sidebarMobileHeight +
@@ -109,6 +110,7 @@ export default function Room() {
       )}
       {/* <ChatWindow /> */}
       <BackgroundSelectionDialog />
+      <TranscriptionsOverlay />
     </div>
   );
 }

@@ -1,3 +1,91 @@
+## 0.11.7
+
+### Changes
+
+- Removed the 16 kbps `maxAudioBitrate` default. Audio bitrate is now uncapped, allowing Opus FEC to function effectively under packet loss.
+
+## 0.11.6
+
+### Changes
+
+- Fixed a display issue with multi-participant captions. The partial results for each participant are now stored and rendered separately.
+- `twilio-video` has been upgraded to 2.34.0.
+- Node.js prerequisite updated to node v22+
+- Added notice on Twilio Functions Node.js v18 deprecation.
+
+
+## 0.11.5
+
+### Changes
+
+- Added Firestore-based email allowlist for Firebase authentication.
+- The gcloud node runtime has been upgraded to v24.
+
+## 0.11.4
+
+### Changes
+
+- Added a new Captions button to the menu bar, which uses the Real-Time Transcriptions feature
+
+## 0.11.3
+
+### Changes
+
+- Change default room type to group rooms.
+
+## 0.11.2
+
+### Changes
+
+- Change default room type to p2p.
+
+## 0.11.1
+
+### Bugfixes
+
+- Adjusts the implicit `dotenv` dependency and moves it from `devDependencies` to `dependencies`.
+
+## 0.11.0
+
+### Changes
+
+- Set minimum Node.js version to 20.x
+
+### Dependency Upgrade
+
+- `firebase-admin` has been upgraded from ^11.2.1 to ^13.2.0.
+- `firebase` has been upgraded from ^9.9.0 to ^11.6.0.
+- `twilio` has been upgraded from ^3.63.1 to ^5.5.2.
+- `@twilio/video-processors` has been upgraded from ^3.0.0-beta.1 to ^3.0.0.
+- `ts-jest` has been upgraded from ^27.0.1 to ^29.3.2.
+- Added `jest` to the devDependencies section.
+- Moved dependencies to the devDependencies section.
+
+## 0.10.6
+
+### Changes
+
+-`@twilio/video-processors` has been upgraded to 3.0.0-beta.1. This release fixes a bug where enabling virtual or blur background sometimes degraded local video, especially on low-powered Intel graphics cards.
+- `twilio-video` has been upgraded to 2.29.1.
+
+## 0.10.5
+
+### Dependency Upgrade
+
+- `puppeteer` has been upgraded from ^5.31.1 to ^22.8.2.
+- `cypress` has been upgraded from ^6.8.0 to ^9.7.0.
+
+## 0.10.4
+
+- The gcloud node runtime has been upgraded to v20.
+
+## 0.10.3
+
+### Changes
+
+-`@twilio/video-processors` has been upgraded to 2.1.0. This release fixes a bug where enabling virtual or blur background sometimes degraded local video, especially on low-powered Intel graphics cards.
+- `twilio-video` has been upgraded to 2.28.1.
+
 ## 0.10.2
 
 ### Changes

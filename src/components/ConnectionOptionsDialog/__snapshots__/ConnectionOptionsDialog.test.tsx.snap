@@ -3,7 +3,7 @@
 exports[`the ConnectionOptionsDialog component when connected to a room should render correctly 1`] = `
 <WithStyles(ForwardRef(Dialog))
   classes={
-    Object {
+    {
       "paper": "makeStyles-paper-3",
     }
   }
@@ -234,7 +234,7 @@ exports[`the ConnectionOptionsDialog component when connected to a room should r
             name="maxAudioBitrate"
             onChange={[Function]}
             placeholder="Leave blank for no limit"
-            value="16000"
+            value=""
           />
         </WithStyles(ForwardRef(FormControl))>
       </WithStyles(ForwardRef(Grid))>
@@ -257,7 +257,7 @@ exports[`the ConnectionOptionsDialog component when connected to a room should r
 exports[`the ConnectionOptionsDialog component when not connected to a room should render correctly 1`] = `
 <WithStyles(ForwardRef(Dialog))
   classes={
-    Object {
+    {
       "paper": "makeStyles-paper-3",
     }
   }
@@ -488,7 +488,7 @@ exports[`the ConnectionOptionsDialog component when not connected to a room shou
             name="maxAudioBitrate"
             onChange={[Function]}
             placeholder="Leave blank for no limit"
-            value="16000"
+            value=""
           />
         </WithStyles(ForwardRef(FormControl))>
       </WithStyles(ForwardRef(Grid))>

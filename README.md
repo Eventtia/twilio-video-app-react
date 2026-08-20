@@ -10,7 +10,7 @@ This application demonstrates a multi-party video application built with [Twilio
 - No other infrastructure is required
 - No code changes are required before your first deploy
 - There is no cost associated with deploying the app
-- Go Rooms usage is free, however [standard usage charges](https://www.twilio.com/video/pricing) apply for Programmable Video when using the app with all other Room types. The chat feature is built using the Conversations API and is free-of-cost up to 200 monthly active users, [standard usage charges](https://www.twilio.com/conversations/pricing) apply thereafter.
+- [Standard usage charges](https://www.twilio.com/video/pricing) apply for Twilio Video when using the app for video calls. The chat feature is built using the Conversations API and is free-of-cost up to 200 monthly active users, [standard usage charges](https://www.twilio.com/conversations/pricing) apply thereafter.
 
 ![App Preview](https://user-images.githubusercontent.com/12685223/94631109-cfca1c80-0284-11eb-8b72-c97276cf34e4.png)
 
@@ -18,8 +18,8 @@ This application demonstrates a multi-party video application built with [Twilio
 
 You must have the following installed:
 
-- [Node.js v14+](https://nodejs.org/en/download/)
-- NPM v6+ (comes installed with newer Node versions)
+- [Node.js v22+](https://nodejs.org/en/download/)
+- NPM v10+ (comes installed with newer Node versions)
 
 You can check which versions of Node.js and NPM you currently have installed with the following commands:
 
@@ -43,7 +43,9 @@ If you want to use `yarn` to install dependencies, first run the [yarn import](h
 
 Twilio Video has partnered with [Krisp Technologies Inc.](https://krisp.ai/) to add [noise cancellation](https://www.twilio.com/docs/video/noise-cancellation) to the local audio track. This feature is licensed under the [Krisp Plugin for Twilio](https://twilio.github.io/krisp-audio-plugin/LICENSE.html). In order to add this feature to your application, please run `npm run noisecancellation:krisp` immediately after the [previous step](#install-dependencies).
 
-## Install Twilio CLI and RTC Plugin
+### Add Captions
+
+The on-screen Captions functionality is provided by the [Real-Time Transcriptions for Video(beta)](https://www.twilio.com/docs/video/api/transcriptions) feature. To use captions in this reference application Real-Time Transcriptions must be enabled by default in the [Room settings page](https://console.twilio.com/us1/develop/video/manage/room-settings) on the Twilio Console. Note that usage charges will apply.
 
 ### Install the Twilio CLI
 
@@ -89,6 +91,8 @@ This performs the following steps:
 
     npm run deploy:twilio-cli -- --override
 
+**NOTE:** As of November 10th, 2025, Twilio Functions requires Node.js v20 or v22, see the [migration guide](https://www.twilio.com/docs/serverless/functions-assets/node-upgrade). If you previously deployed this Twilio Video React App using Node.js v18 then you either need to edit the Function entry in the Twilio Console and select node v22 or else delete the entry in the Twilio Console and redeploy from the command line. The node setting can be found in the Twilio Console in the Functions & Assets section -> Services and select the video-app-xxxx entry.
+
 ## View app details
 
 View the URL and passcode for the Video app with
@@ -111,25 +115,12 @@ If any errors occur after running a [Twilio CLI RTC Plugin](https://github.com/t
 1. Run `twilio rtc:apps:video:delete` to delete any existing video apps.
 1. Run `npm run deploy:twilio-cli` to deploy a new video app.
 
-## App Behavior with Different Room Types
-
-After running the command [to deploy the app to Twilio](#deploy-the-app-to-twilio), the room type will be returned in the command line output. Each room type provides a different video experience. More details about these room types can be found [here](https://www.twilio.com/docs/video/tutorials/understanding-video-rooms). The rest of this section explains how these room types affect the behavior of the video app.
-
-_Group_ - The Group room type allows up to fifty participants to join a video room in the app. The Network Quality Level (NQL) indicators, dominant speaker, and start-stop recordings are demonstrated with this room type. Also, the VP8 video codec with simulcast enabled along with a bandwidth profile are set by default in order to provide an optimal group video app experience.
-
-_Small Group_ - **This is a legacy room type; we recommend using Group Rooms instead when developing multiparty applications.** The Small Group room type provides an identical group video app experience except for a smaller limit of four participants.
-
-_Peer-to-peer_ - Although up to ten participants can join a room using the Peer-to-peer (P2P) room type, it is ideal for a one to one video experience. The NQL indicators, bandwidth profiles, dominant speaker, and start-stop recordings cannot be used with this room type. Thus, they are not demonstrated in the video app. Also, the VP8 video codec with simulcast disabled and 720p minimum video capturing dimensions are also set by default in order to provide an optimal one to one video app experience. If more than ten participants join a room with this room type, then the video app will present an error.
-
-_Go_ - The Go room type provides a similar Peer-to-peer video app experience except for a smaller limit of two participants. If more than two participants join a room with this room type, then the video app will present an error.
-
-If the max number of participants is exceeded, then the video app will present an error for all room types.
 
 ## Features
 
 The Video app has the following features:
 
-- [x] Video conferencing with real-time video and audio
+- [x] Video calling with real-time video and audio
 - [x] Chat support for textual and file-based messaging
 - [x] Enable/disable camera
 - [x] Mute/unmute mic
@@ -138,6 +129,7 @@ The Video app has the following features:
 - [x] [Network quality](https://www.twilio.com/docs/video/using-network-quality-api) indicator
 - [x] Defines participant bandwidth usage with the [Bandwidth Profile API](https://www.twilio.com/docs/video/tutorials/using-bandwidth-profile-api)
 - [x] Start and stop recording with the [Recording Rules API](https://www.twilio.com/docs/video/api/recording-rules)
+- [x] Virtual backgrounds with [Video Processor library](https://www.twilio.com/docs/video/video-processors)
 
 ## Browser Support
 
@@ -236,7 +228,7 @@ Since the Twilio Video SDK manages the `room` object state, it can be used as th
 
 [React hooks](https://reactjs.org/docs/hooks-intro.html) can be used to subscribe to events and trigger component re-renders. This application frequently uses the `useState` and `useEffect` hooks to subscribe to changes in room state. Here is a simple example:
 
-```
+```javascript
 import { useEffect, useState } from 'react';
 
 export default function useDominantSpeaker(room) {
